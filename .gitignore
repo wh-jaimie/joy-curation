@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+
+# 중간 산출물(초기 도서관대출 기반 접근 - 폐기)
+output/enriched.json
+output/master.json
+output/조이네_영어원서_큐레이션_2026.xlsx
+
+# 개인/사업 파일 (공개 저장소 제외)
+KakaoTalkChats.txt
+사업기획서.md
+부모니즈_분석보고서.md
+/조이네_파닉스전_영어그림책_큐레이션.xlsx
