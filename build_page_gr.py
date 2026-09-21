@@ -7,6 +7,13 @@ DATA = os.path.join(HERE, "output", "gr_master.json")
 OUT = os.path.join(HERE, "output", "index.html")
 
 books = json.load(open(DATA, encoding="utf-8"))["books"]
+import re as _re
+def _bid(b):  # 체크 저장용 안정 ID (ISBN 우선, 없으면 제목 슬러그)
+    if b.get("isbn"):
+        return "i" + str(b["isbn"])
+    return "t" + _re.sub(r"[^a-z0-9]", "", b["title"].lower())
+for b in books:
+    b["id"] = _bid(b)
 from collections import Counter
 band_counts = Counter(b["band"] for b in books)
 payload = {"books": books, "bands": [
@@ -67,8 +74,33 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
 .pick .age{font-size:.82rem;color:var(--ink-soft);margin-top:2px}
 .pick .cnt{font-size:.78rem;font-weight:800;color:var(--pc);margin-top:8px}
 .pick .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--pc);margin-right:6px;vertical-align:1px}
+/* 읽기 진행률 패널 */
+.progress{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  padding:16px 18px;box-shadow:var(--shadow)}
+.progress .row1{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.progress .big{font-family:'Fraunces',serif;font-weight:700;font-size:1.6rem;color:var(--teal-deep)}
+.progress .sub{font-size:.86rem;color:var(--ink-soft)}
+.progress .reset{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+  font:inherit;font-size:.76rem;font-weight:700;padding:5px 11px;border-radius:999px;cursor:pointer}
+.bar{height:12px;border-radius:999px;background:var(--surface-2);overflow:hidden;margin-top:12px}
+.bar > i{display:block;height:100%;width:0;border-radius:999px;
+  background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .35s ease}
 section{padding-block:22px}
 .toolbar{display:flex;align-items:center;gap:10px;margin:6px 0 20px;flex-wrap:wrap}
+.togglelbl{display:inline-flex;align-items:center;gap:7px;font-size:.85rem;color:var(--ink);cursor:pointer;
+  border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:999px;font-weight:700}
+.togglelbl input{accent-color:var(--teal-deep);width:15px;height:15px}
+/* 봤어요 버튼/상태 */
+.seenbtn{border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);font:inherit;
+  font-size:.8rem;font-weight:800;padding:7px 10px;border-radius:9px;cursor:pointer;margin-top:9px;
+  display:flex;align-items:center;justify-content:center;gap:6px;transition:all .14s}
+.seenbtn:hover{border-color:var(--teal-deep);color:var(--teal-deep)}
+.card.seen{opacity:.62}
+.card.seen:hover{opacity:1}
+.card.seen .seenbtn{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff}
+.seencheck{position:absolute;bottom:8px;left:8px;background:var(--teal-deep);color:#fff;font-weight:800;
+  font-size:.72rem;padding:3px 9px;border-radius:8px;display:none;box-shadow:var(--shadow)}
+.card.seen .seencheck{display:block}
 .toolbar select{padding:7px 11px;border-radius:9px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:.85rem}
 .count{font-size:.85rem;color:var(--ink-soft);margin-left:auto}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:18px}
@@ -115,6 +147,14 @@ footer p{color:var(--ink-soft);font-size:.82rem;margin:.3em 0}
       <strong>전세계 독자들이 가장 많이 담고 읽은 순서</strong>로 정리했어요.
       연령대만 고르면 바로 후보가 나옵니다.</p>
     <div class="pick" id="pick"></div>
+    <div class="progress" id="progress">
+      <div class="row1">
+        <span class="big" id="prBig">0%</span>
+        <span class="sub" id="prSub">아직 체크한 책이 없어요 · 카드의 <strong>봤어요</strong>를 눌러 기록하세요</span>
+        <button class="reset" id="prReset">기록 초기화</button>
+      </div>
+      <div class="bar"><i id="prBar"></i></div>
+    </div>
     <p class="note">※ Goodreads의 board-books·toddler·picture-books 인기 셸프를 합산한 순위입니다.
       국내에서 사기 쉬운 명작 위주라, 노부영·웬디북 등에서 대부분 구하거나 도서관에서 빌릴 수 있어요.
       일부 책에는 국내 공공도서관 대출 데이터도 함께 표시했습니다.</p>
@@ -127,6 +167,7 @@ footer p{color:var(--ink-soft);font-size:.82rem;margin:.3em 0}
         <option value="title">제목순</option>
         <option value="lib">국내 도서관 대출순</option>
       </select></label>
+      <label class="togglelbl"><input type="checkbox" id="unseen"> 안 본 책만</label>
       <span class="count" id="count"></span>
     </div>
     <div class="grid" id="grid"></div>
@@ -144,7 +185,32 @@ const P=/*DATA*/;const {books,bands}=P;
 const esc=s=>(s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const bandColor={A:'var(--bandA)',B:'var(--bandB)',C:'var(--bandC)'};
 const bandName={A:'아기·첫책',B:'유아',C:'미취학'};
-let curBand='ALL',curSort='rank',curQ='',shown=48;
+let curBand='ALL',curSort='rank',curQ='',shown=48,unseenOnly=false;
+
+// ── 봤어요 기록 (기기에 저장) ──
+const SEEN_KEY='joy-seen';
+let seen=new Set();
+try{const raw=localStorage.getItem(SEEN_KEY);if(raw)seen=new Set(JSON.parse(raw));}catch(e){}
+function saveSeen(){try{localStorage.setItem(SEEN_KEY,JSON.stringify([...seen]));}catch(e){}}
+function updateProgress(){
+  const total=books.length,done=books.filter(b=>seen.has(b.id)).length;
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById('prBig').textContent=pct+'%';
+  document.getElementById('prBar').style.width=pct+'%';
+  document.getElementById('prSub').innerHTML= done===0
+    ? '아직 체크한 책이 없어요 · 카드의 <strong>봤어요</strong>를 눌러 기록하세요'
+    : `전체 ${total}권 중 <strong>${done}권</strong>을 봤어요`;
+}
+function toggleSeen(id){
+  if(seen.has(id))seen.delete(id);else seen.add(id);
+  saveSeen();updateProgress();
+  if(unseenOnly)render();else{
+    document.querySelectorAll(`.seenbtn[data-id="${CSS.escape(id)}"]`).forEach(btn=>{
+      const on=seen.has(id);btn.textContent=on?'✓ 봤어요':'☐ 봤어요';
+      btn.closest('.card').classList.toggle('seen',on);
+    });
+  }
+}
 
 // 연령대 고르기 버튼
 document.getElementById('pick').innerHTML =
@@ -158,11 +224,20 @@ document.querySelectorAll('#pick button').forEach(btn=>btn.addEventListener('cli
 document.getElementById('sort').addEventListener('change',e=>{curSort=e.target.value;render();});
 document.getElementById('q').addEventListener('input',e=>{curQ=e.target.value.toLowerCase().trim();shown=48;render();});
 document.getElementById('more').addEventListener('click',()=>{shown+=48;render();});
+document.getElementById('unseen').addEventListener('change',e=>{unseenOnly=e.target.checked;shown=48;render();});
+document.getElementById('grid').addEventListener('click',e=>{
+  const btn=e.target.closest('.seenbtn');if(btn)toggleSeen(btn.dataset.id);
+});
+document.getElementById('prReset').addEventListener('click',()=>{
+  if(seen.size===0)return;
+  if(confirm('봤어요 기록을 모두 지울까요?')){seen.clear();saveSeen();updateProgress();render();}
+});
 window._imgErr=el=>{el.parentElement.classList.add('noimg');el.remove();};
 
 function filtered(){
   let r=books.filter(b=>{
     if(curBand!=='ALL'&&b.band_key!==curBand)return false;
+    if(unseenOnly&&seen.has(b.id))return false;
     if(curQ&&!(b.title+' '+b.author).toLowerCase().includes(curQ))return false;
     return true;
   });
@@ -173,12 +248,13 @@ function filtered(){
 }
 function card(b){
   const c=bandColor[b.band_key];
-  return `<article class="card">
+  return `<article class="card${seen.has(b.id)?' seen':''}">
     <div class="cover">
       ${b.cover?`<img loading="lazy" src="${esc(b.cover)}" alt="${esc(b.title)}" onerror="_imgErr(this)">`:''}
       <div class="ph" style="background:linear-gradient(150deg,${c},color-mix(in srgb,${c} 60%,#000))"><div class="pt">${esc(b.title)}</div></div>
       <span class="grank tnum">인기 #${b.rank}</span>
       <span class="bandtag" style="background:${c}">${bandName[b.band_key]}</span>
+      <span class="seencheck">✓ 봤어요</span>
     </div>
     <div class="body">
       <div class="t">${esc(b.title)}</div>
@@ -188,6 +264,7 @@ function card(b){
         ${b.shelves.map(s=>`<span class="chip2">${esc(s)}</span>`).join('')}
         ${b.lib_loans?`<span class="chip2 lib tnum">📚 국내도서관 ${b.lib_loans}회</span>`:''}
       </div>
+      <button class="seenbtn" data-id="${esc(b.id)}">${seen.has(b.id)?'✓ 봤어요':'☐ 봤어요'}</button>
     </div>
   </article>`;
 }
@@ -205,6 +282,7 @@ document.getElementById('theme').addEventListener('click',()=>{
   const next=dark?'light':'dark';root.setAttribute('data-theme',next);
   try{localStorage.setItem('joy-theme',next);}catch(e){}
 });
+updateProgress();
 render();
 </script>
 """
