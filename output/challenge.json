@@ -16,7 +16,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10577107-L.jpg",
      "isbn": "9781529074932",
      "year": 1982,
-     "id": "c1"
+     "id": "c1",
+     "pop_rank": 6
     },
     {
      "gid": 2,
@@ -28,7 +29,8 @@
      "cover": "https://covers.openlibrary.org/b/id/276948-L.jpg",
      "isbn": "9781843620693",
      "year": 1999,
-     "id": "c2"
+     "id": "c2",
+     "pop_rank": 74
     },
     {
      "gid": 3,
@@ -40,7 +42,8 @@
      "cover": "https://covers.openlibrary.org/b/id/12624136-L.jpg",
      "isbn": "3806749698",
      "year": 1967,
-     "id": "c3"
+     "id": "c3",
+     "pop_rank": 3
     },
     {
      "gid": 4,
@@ -52,7 +55,8 @@
      "cover": "https://covers.openlibrary.org/b/id/437901-L.jpg",
      "isbn": "1416950354",
      "year": 1982,
-     "id": "c4"
+     "id": "c4",
+     "pop_rank": 5
     },
     {
      "gid": 5,
@@ -64,7 +68,8 @@
      "cover": "https://covers.openlibrary.org/b/id/3153851-L.jpg",
      "isbn": "9781852692872",
      "year": 1975,
-     "id": "c5"
+     "id": "c5",
+     "pop_rank": 0
     }
    ]
   },
@@ -84,7 +89,8 @@
      "cover": "https://covers.openlibrary.org/b/id/2582595-L.jpg",
      "isbn": "9780794502102",
      "year": 2002,
-     "id": "c6"
+     "id": "c6",
+     "pop_rank": 0
     },
     {
      "gid": 7,
@@ -96,7 +102,8 @@
      "cover": "https://covers.openlibrary.org/b/id/255747-L.jpg",
      "isbn": "9780395411056",
      "year": 1986,
-     "id": "c7"
+     "id": "c7",
+     "pop_rank": 0
     },
     {
      "gid": 8,
@@ -108,7 +115,8 @@
      "cover": "https://covers.openlibrary.org/b/id/2325432-L.jpg",
      "isbn": "0152056610",
      "year": 2008,
-     "id": "c8"
+     "id": "c8",
+     "pop_rank": 11
     },
     {
      "gid": 9,
@@ -120,7 +128,8 @@
      "cover": "https://covers.openlibrary.org/b/id/544664-L.jpg",
      "isbn": "9780439701808",
      "year": 2003,
-     "id": "c9"
+     "id": "c9",
+     "pop_rank": 12
     },
     {
      "gid": 10,
@@ -132,7 +141,8 @@
      "cover": "https://covers.openlibrary.org/b/id/7351895-L.jpg",
      "isbn": "0811877825",
      "year": 2011,
-     "id": "c10"
+     "id": "c10",
+     "pop_rank": 48
     }
    ]
   },
@@ -152,7 +162,8 @@
      "cover": "https://covers.openlibrary.org/b/id/7835968-L.jpg",
      "isbn": "9780241003008",
      "year": 1969,
-     "id": "c11"
+     "id": "c11",
+     "pop_rank": 1
     },
     {
      "gid": 12,
@@ -164,7 +175,8 @@
      "cover": "https://covers.openlibrary.org/b/id/445220-L.jpg",
      "isbn": "0827344937",
      "year": 1982,
-     "id": "c12"
+     "id": "c12",
+     "pop_rank": 35
     },
     {
      "gid": 13,
@@ -176,7 +188,8 @@
      "cover": "https://covers.openlibrary.org/b/id/259485-L.jpg",
      "isbn": "9780241002339",
      "year": 1993,
-     "id": "c13"
+     "id": "c13",
+     "pop_rank": 0
     },
     {
      "gid": 14,
@@ -188,7 +201,8 @@
      "cover": "https://covers.openlibrary.org/b/id/8085856-L.jpg",
      "isbn": "9780803736801",
      "year": 2012,
-     "id": "c14"
+     "id": "c14",
+     "pop_rank": 83
     },
     {
      "gid": 15,
@@ -200,7 +214,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6475217-L.jpg",
      "isbn": "9780689707490",
      "year": 1978,
-     "id": "c15"
+     "id": "c15",
+     "pop_rank": 67
     }
    ]
   },
@@ -220,7 +235,8 @@
      "cover": "https://covers.openlibrary.org/b/id/9347233-L.jpg",
      "isbn": "9781596431959",
      "year": 2006,
-     "id": "c16"
+     "id": "c16",
+     "pop_rank": 0
     },
     {
      "gid": 17,
@@ -232,7 +248,8 @@
      "cover": "https://covers.openlibrary.org/b/id/5019277-L.jpg",
      "isbn": "0395615771",
      "year": 1985,
-     "id": "c17"
+     "id": "c17",
+     "pop_rank": 0
     },
     {
      "gid": 18,
@@ -244,7 +261,8 @@
      "cover": "https://covers.openlibrary.org/b/id/112796-L.jpg",
      "isbn": "9780152007713",
      "year": 1990,
-     "id": "c18"
+     "id": "c18",
+     "pop_rank": 62
     },
     {
      "gid": 19,
@@ -256,7 +274,8 @@
      "cover": "https://covers.openlibrary.org/b/id/438047-L.jpg",
      "isbn": "9780689863042",
      "year": 1984,
-     "id": "c19"
+     "id": "c19",
+     "pop_rank": 30
     },
     {
      "gid": 20,
@@ -268,7 +287,8 @@
      "cover": "https://covers.openlibrary.org/b/id/7395995-L.jpg",
      "isbn": "0375975020",
      "year": 1994,
-     "id": "c20"
+     "id": "c20",
+     "pop_rank": 0
     }
    ]
   },
@@ -288,7 +308,8 @@
      "cover": "https://covers.openlibrary.org/b/id/841692-L.jpg",
      "isbn": "9781581170917",
      "year": 2000,
-     "id": "c21"
+     "id": "c21",
+     "pop_rank": 0
     },
     {
      "gid": 22,
@@ -300,7 +321,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6974006-L.jpg",
      "isbn": "9780517800577",
      "year": 1999,
-     "id": "c22"
+     "id": "c22",
+     "pop_rank": 0
     },
     {
      "gid": 23,
@@ -312,7 +334,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6637747-L.jpg",
      "isbn": "0590464795",
      "year": 1992,
-     "id": "c23"
+     "id": "c23",
+     "pop_rank": 0
     },
     {
      "gid": 24,
@@ -324,7 +347,8 @@
      "cover": "https://covers.openlibrary.org/b/id/423601-L.jpg",
      "isbn": "9789999098823",
      "year": 1961,
-     "id": "c24"
+     "id": "c24",
+     "pop_rank": 0
     },
     {
      "gid": 25,
@@ -336,7 +360,8 @@
      "cover": "https://covers.openlibrary.org/b/id/5547929-L.jpg",
      "isbn": "9780395900239",
      "year": 1989,
-     "id": "c25"
+     "id": "c25",
+     "pop_rank": 94
     }
    ]
   },
@@ -356,7 +381,8 @@
      "cover": "https://covers.openlibrary.org/b/id/435920-L.jpg",
      "isbn": "0689835612",
      "year": 2001,
-     "id": "c26"
+     "id": "c26",
+     "pop_rank": 0
     },
     {
      "gid": 27,
@@ -368,7 +394,8 @@
      "cover": "https://covers.openlibrary.org/b/id/383707-L.jpg",
      "isbn": "0780729978",
      "year": 1989,
-     "id": "c27"
+     "id": "c27",
+     "pop_rank": 0
     },
     {
      "gid": 28,
@@ -380,7 +407,8 @@
      "cover": "https://covers.openlibrary.org/b/id/254626-L.jpg",
      "isbn": "9780553539899",
      "year": 1960,
-     "id": "c28"
+     "id": "c28",
+     "pop_rank": 38
     },
     {
      "gid": 29,
@@ -392,7 +420,8 @@
      "cover": "https://covers.openlibrary.org/b/id/243308-L.jpg",
      "isbn": "9780385608213",
      "year": 2005,
-     "id": "c29"
+     "id": "c29",
+     "pop_rank": 0
     },
     {
      "gid": 30,
@@ -404,7 +433,8 @@
      "cover": "https://covers.openlibrary.org/b/id/13282906-L.jpg",
      "isbn": "1536216801",
      "year": 1994,
-     "id": "c30"
+     "id": "c30",
+     "pop_rank": 7
     }
    ]
   },
@@ -424,7 +454,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10817286-L.jpg",
      "isbn": "9781406328745",
      "year": 2010,
-     "id": "c31"
+     "id": "c31",
+     "pop_rank": 0
     },
     {
      "gid": 32,
@@ -436,7 +467,8 @@
      "cover": "https://covers.openlibrary.org/b/id/438326-L.jpg",
      "isbn": "0689870280",
      "year": 1982,
-     "id": "c32"
+     "id": "c32",
+     "pop_rank": 9
     },
     {
      "gid": 33,
@@ -448,7 +480,8 @@
      "cover": "https://covers.openlibrary.org/b/id/35556-L.jpg",
      "isbn": "9780060275044",
      "year": 1947,
-     "id": "c33"
+     "id": "c33",
+     "pop_rank": 2
     },
     {
      "gid": 34,
@@ -460,7 +493,8 @@
      "cover": "https://covers.openlibrary.org/b/id/7092593-L.jpg",
      "isbn": "9781579820534",
      "year": 2000,
-     "id": "c34"
+     "id": "c34",
+     "pop_rank": 0
     },
     {
      "gid": 35,
@@ -472,7 +506,8 @@
      "cover": "https://covers.openlibrary.org/b/id/114082-L.jpg",
      "isbn": "0440833973",
      "year": 1993,
-     "id": "c35"
+     "id": "c35",
+     "pop_rank": 23
     }
    ]
   },
@@ -492,7 +527,8 @@
      "cover": "https://covers.openlibrary.org/b/id/189297-L.jpg",
      "isbn": "2226189351",
      "year": 1997,
-     "id": "c36"
+     "id": "c36",
+     "pop_rank": 0
     },
     {
      "gid": 37,
@@ -504,7 +540,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6815337-L.jpg",
      "isbn": "9781884734717",
      "year": 2000,
-     "id": "c37"
+     "id": "c37",
+     "pop_rank": 0
     },
     {
      "gid": 38,
@@ -516,7 +553,8 @@
      "cover": "https://covers.openlibrary.org/b/id/2379677-L.jpg",
      "isbn": "0316009180",
      "year": 2000,
-     "id": "c38"
+     "id": "c38",
+     "pop_rank": 0
     },
     {
      "gid": 39,
@@ -528,7 +566,8 @@
      "cover": "https://covers.openlibrary.org/b/id/544896-L.jpg",
      "isbn": "043980924X",
      "year": 2005,
-     "id": "c39"
+     "id": "c39",
+     "pop_rank": 0
     },
     {
      "gid": 40,
@@ -540,7 +579,8 @@
      "cover": "https://covers.openlibrary.org/b/isbn/9780316574525-L.jpg",
      "isbn": "9780316574525",
      "year": 2024,
-     "id": "c40"
+     "id": "c40",
+     "pop_rank": 0
     }
    ]
   },
@@ -560,7 +600,8 @@
      "cover": "https://covers.openlibrary.org/b/id/12954864-L.jpg",
      "isbn": "1416987339",
      "year": 2009,
-     "id": "c41"
+     "id": "c41",
+     "pop_rank": 42
     },
     {
      "gid": 42,
@@ -572,7 +613,8 @@
      "cover": "https://covers.openlibrary.org/b/id/580246-L.jpg",
      "isbn": "9780805059113",
      "year": 1987,
-     "id": "c42"
+     "id": "c42",
+     "pop_rank": 0
     },
     {
      "gid": 43,
@@ -584,7 +626,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10672062-L.jpg",
      "isbn": "9780694013012",
      "year": 1977,
-     "id": "c43"
+     "id": "c43",
+     "pop_rank": 16
     },
     {
      "gid": 44,
@@ -596,7 +639,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6815719-L.jpg",
      "isbn": "9780761137993",
      "year": 2005,
-     "id": "c44"
+     "id": "c44",
+     "pop_rank": 31
     },
     {
      "gid": 45,
@@ -608,7 +652,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10978432-L.jpg",
      "isbn": "1328852253",
      "year": 2008,
-     "id": "c45"
+     "id": "c45",
+     "pop_rank": 20
     }
    ]
   },
@@ -628,7 +673,8 @@
      "cover": "https://covers.openlibrary.org/b/id/1199659-L.jpg",
      "isbn": "0399235663",
      "year": 1984,
-     "id": "c46"
+     "id": "c46",
+     "pop_rank": 46
     },
     {
      "gid": 47,
@@ -640,7 +686,8 @@
      "cover": "https://covers.openlibrary.org/b/id/11322377-L.jpg",
      "isbn": "1442458801",
      "year": 2014,
-     "id": "c47"
+     "id": "c47",
+     "pop_rank": 0
     },
     {
      "gid": 48,
@@ -652,7 +699,8 @@
      "cover": "https://covers.openlibrary.org/b/id/651393-L.jpg",
      "isbn": "1904550622",
      "year": 1999,
-     "id": "c48"
+     "id": "c48",
+     "pop_rank": 0
     },
     {
      "gid": 49,
@@ -664,7 +712,8 @@
      "cover": "https://covers.openlibrary.org/b/id/51010-L.jpg",
      "isbn": "9780690013924",
      "year": 1977,
-     "id": "c49"
+     "id": "c49",
+     "pop_rank": 0
     },
     {
      "gid": 50,
@@ -676,7 +725,8 @@
      "cover": "https://covers.openlibrary.org/b/id/259476-L.jpg",
      "isbn": "9784032371307",
      "year": 1990,
-     "id": "c50"
+     "id": "c50",
+     "pop_rank": 0
     }
    ]
   },
@@ -696,7 +746,8 @@
      "cover": "https://covers.openlibrary.org/b/id/560373-L.jpg",
      "isbn": "0746050798",
      "year": 2002,
-     "id": "c51"
+     "id": "c51",
+     "pop_rank": 0
     },
     {
      "gid": 52,
@@ -708,7 +759,8 @@
      "cover": "https://covers.openlibrary.org/b/id/360902-L.jpg",
      "isbn": "9780140557022",
      "year": 1994,
-     "id": "c52"
+     "id": "c52",
+     "pop_rank": 0
     },
     {
      "gid": 53,
@@ -720,7 +772,8 @@
      "cover": "https://covers.openlibrary.org/b/id/7442591-L.jpg",
      "isbn": "9781481480994",
      "year": 2016,
-     "id": "c53"
+     "id": "c53",
+     "pop_rank": 71
     },
     {
      "gid": 54,
@@ -732,7 +785,8 @@
      "cover": "https://covers.openlibrary.org/b/id/5723134-L.jpg",
      "isbn": "9781423137887",
      "year": 2008,
-     "id": "c54"
+     "id": "c54",
+     "pop_rank": 0
     },
     {
      "gid": 55,
@@ -744,7 +798,8 @@
      "cover": "https://covers.openlibrary.org/b/id/13257873-L.jpg",
      "isbn": "9781529005967",
      "year": 2007,
-     "id": "c55"
+     "id": "c55",
+     "pop_rank": 0
     }
    ]
   },
@@ -764,7 +819,8 @@
      "cover": "https://covers.openlibrary.org/b/id/7848721-L.jpg",
      "isbn": "0062274465",
      "year": 2013,
-     "id": "c56"
+     "id": "c56",
+     "pop_rank": 0
     },
     {
      "gid": 57,
@@ -776,7 +832,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10219853-L.jpg",
      "isbn": "061382993X",
      "year": 1994,
-     "id": "c57"
+     "id": "c57",
+     "pop_rank": 0
     },
     {
      "gid": 58,
@@ -788,7 +845,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10935277-L.jpg",
      "isbn": "9781931016018",
      "year": 1945,
-     "id": "c58"
+     "id": "c58",
+     "pop_rank": 0
     },
     {
      "gid": 59,
@@ -800,7 +858,8 @@
      "cover": "https://covers.openlibrary.org/b/id/8364400-L.jpg",
      "isbn": "9780340779170",
      "year": 1993,
-     "id": "c59"
+     "id": "c59",
+     "pop_rank": 0
     },
     {
      "gid": 60,
@@ -812,7 +871,8 @@
      "cover": "https://covers.openlibrary.org/b/id/3267631-L.jpg",
      "isbn": "0756903874",
      "year": 1970,
-     "id": "c60"
+     "id": "c60",
+     "pop_rank": 0
     }
    ]
   },
@@ -832,7 +892,8 @@
      "cover": "https://covers.openlibrary.org/b/id/516665-L.jpg",
      "isbn": "0763629871",
      "year": 2006,
-     "id": "c61"
+     "id": "c61",
+     "pop_rank": 0
     },
     {
      "gid": 62,
@@ -844,7 +905,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10351371-L.jpg",
      "isbn": "054773395X",
      "year": 2013,
-     "id": "c62"
+     "id": "c62",
+     "pop_rank": 0
     },
     {
      "gid": 63,
@@ -856,7 +918,8 @@
      "cover": "https://covers.openlibrary.org/b/id/50834-L.jpg",
      "isbn": "0064431592",
      "year": 1986,
-     "id": "c63"
+     "id": "c63",
+     "pop_rank": 0
     },
     {
      "gid": 64,
@@ -868,7 +931,8 @@
      "cover": "https://covers.openlibrary.org/b/id/575397-L.jpg",
      "isbn": "0439692288",
      "year": 2002,
-     "id": "c64"
+     "id": "c64",
+     "pop_rank": 0
     },
     {
      "gid": 65,
@@ -880,7 +944,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10134995-L.jpg",
      "isbn": "9781484476727",
      "year": 1962,
-     "id": "c65"
+     "id": "c65",
+     "pop_rank": 19
     }
    ]
   },
@@ -900,7 +965,8 @@
      "cover": "https://covers.openlibrary.org/b/id/1199330-L.jpg",
      "isbn": "0959252908",
      "year": 1980,
-     "id": "c66"
+     "id": "c66",
+     "pop_rank": 44
     },
     {
      "gid": 67,
@@ -912,7 +978,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6815361-L.jpg",
      "isbn": "0907349994",
      "year": 1983,
-     "id": "c67"
+     "id": "c67",
+     "pop_rank": 0
     },
     {
      "gid": 68,
@@ -924,7 +991,8 @@
      "cover": "https://covers.openlibrary.org/b/id/2078976-L.jpg",
      "isbn": "9781536417579",
      "year": 1961,
-     "id": "c68"
+     "id": "c68",
+     "pop_rank": 0
     },
     {
      "gid": 69,
@@ -936,7 +1004,8 @@
      "cover": "https://covers.openlibrary.org/b/id/48152-L.jpg",
      "isbn": "0062051865",
      "year": 1999,
-     "id": "c69"
+     "id": "c69",
+     "pop_rank": 36
     },
     {
      "gid": 70,
@@ -948,7 +1017,8 @@
      "cover": "https://covers.openlibrary.org/b/id/24282-L.jpg",
      "isbn": "0060268654",
      "year": 1956,
-     "id": "c70"
+     "id": "c70",
+     "pop_rank": 0
     }
    ]
   },
@@ -968,7 +1038,8 @@
      "cover": "https://covers.openlibrary.org/b/id/1389424-L.jpg",
      "isbn": "9780746041918",
      "year": 2001,
-     "id": "c71"
+     "id": "c71",
+     "pop_rank": 0
     },
     {
      "gid": 72,
@@ -980,7 +1051,8 @@
      "cover": "https://covers.openlibrary.org/b/id/796359-L.jpg",
      "isbn": "1523507772",
      "year": 1993,
-     "id": "c72"
+     "id": "c72",
+     "pop_rank": 10
     },
     {
      "gid": 73,
@@ -992,7 +1064,8 @@
      "cover": "https://covers.openlibrary.org/b/id/259809-L.jpg",
      "isbn": "0560087810",
      "year": 1980,
-     "id": "c73"
+     "id": "c73",
+     "pop_rank": 0
     },
     {
      "gid": 74,
@@ -1004,7 +1077,8 @@
      "cover": "https://covers.openlibrary.org/b/id/5725264-L.jpg",
      "isbn": "0439021561",
      "year": 1900,
-     "id": "c74"
+     "id": "c74",
+     "pop_rank": 58
     },
     {
      "gid": 75,
@@ -1016,7 +1090,8 @@
      "cover": "https://covers.openlibrary.org/b/id/699933-L.jpg",
      "isbn": "0812443837",
      "year": 1973,
-     "id": "c75"
+     "id": "c75",
+     "pop_rank": 0
     }
    ]
   },
@@ -1036,7 +1111,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10847067-L.jpg",
      "isbn": "1788436539",
      "year": 2019,
-     "id": "c76"
+     "id": "c76",
+     "pop_rank": 0
     },
     {
      "gid": 77,
@@ -1048,7 +1124,8 @@
      "cover": "https://covers.openlibrary.org/b/id/857691-L.jpg",
      "isbn": "9780439806749",
      "year": 1998,
-     "id": "c77"
+     "id": "c77",
+     "pop_rank": 0
     },
     {
      "gid": 78,
@@ -1060,7 +1137,8 @@
      "cover": "https://covers.openlibrary.org/b/id/516528-L.jpg",
      "isbn": "9780763634414",
      "year": 2005,
-     "id": "c78"
+     "id": "c78",
+     "pop_rank": 32
     },
     {
      "gid": 79,
@@ -1072,7 +1150,8 @@
      "cover": "https://covers.openlibrary.org/b/id/575612-L.jpg",
      "isbn": "9780803731929",
      "year": 2007,
-     "id": "c79"
+     "id": "c79",
+     "pop_rank": 52
     },
     {
      "gid": 80,
@@ -1084,7 +1163,8 @@
      "cover": "https://covers.openlibrary.org/b/id/12961695-L.jpg",
      "isbn": "9780735845008",
      "year": 2022,
-     "id": "c80"
+     "id": "c80",
+     "pop_rank": 63
     }
    ]
   },
@@ -1104,7 +1184,8 @@
      "cover": "https://covers.openlibrary.org/b/id/188727-L.jpg",
      "isbn": "2378880537",
      "year": 1992,
-     "id": "c81"
+     "id": "c81",
+     "pop_rank": 0
     },
     {
      "gid": 82,
@@ -1116,7 +1197,8 @@
      "cover": "https://covers.openlibrary.org/b/id/8561698-L.jpg",
      "isbn": "9781845025038",
      "year": 1999,
-     "id": "c82"
+     "id": "c82",
+     "pop_rank": 0
     },
     {
      "gid": 83,
@@ -1128,7 +1210,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6462700-L.jpg",
      "isbn": "0545218292",
      "year": 2010,
-     "id": "c83"
+     "id": "c83",
+     "pop_rank": 0
     },
     {
      "gid": 84,
@@ -1140,7 +1223,8 @@
      "cover": "https://covers.openlibrary.org/b/id/8580217-L.jpg",
      "isbn": "9780375804014",
      "year": 1971,
-     "id": "c84"
+     "id": "c84",
+     "pop_rank": 84
     },
     {
      "gid": 85,
@@ -1152,7 +1236,8 @@
      "cover": "https://covers.openlibrary.org/b/id/50842-L.jpg",
      "isbn": "9788952723925",
      "year": 1963,
-     "id": "c85"
+     "id": "c85",
+     "pop_rank": 14
     }
    ]
   },
@@ -1172,7 +1257,8 @@
      "cover": "https://covers.openlibrary.org/b/id/760982-L.jpg",
      "isbn": "9781416909705",
      "year": 2006,
-     "id": "c86"
+     "id": "c86",
+     "pop_rank": 0
     },
     {
      "gid": 87,
@@ -1184,7 +1270,8 @@
      "cover": "https://covers.openlibrary.org/b/id/799125-L.jpg",
      "isbn": "1563974525",
      "year": 1995,
-     "id": "c87"
+     "id": "c87",
+     "pop_rank": 0
     },
     {
      "gid": 88,
@@ -1196,7 +1283,8 @@
      "cover": "https://covers.openlibrary.org/b/id/445200-L.jpg",
      "isbn": "9780833526731",
      "year": 1988,
-     "id": "c88"
+     "id": "c88",
+     "pop_rank": 0
     },
     {
      "gid": 89,
@@ -1208,7 +1296,8 @@
      "cover": "https://covers.openlibrary.org/b/id/7256095-L.jpg",
      "isbn": "8925550636",
      "year": 2012,
-     "id": "c89"
+     "id": "c89",
+     "pop_rank": 0
     },
     {
      "gid": 90,
@@ -1220,7 +1309,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10839950-L.jpg",
      "isbn": "9781529005912",
      "year": 2001,
-     "id": "c90"
+     "id": "c90",
+     "pop_rank": 0
     }
    ]
   },
@@ -1240,7 +1330,8 @@
      "cover": "https://covers.openlibrary.org/b/id/438889-L.jpg",
      "isbn": "9781405052481",
      "year": 2004,
-     "id": "c91"
+     "id": "c91",
+     "pop_rank": 0
     },
     {
      "gid": 92,
@@ -1252,7 +1343,8 @@
      "cover": "https://covers.openlibrary.org/b/id/8236410-L.jpg",
      "isbn": "1581733062",
      "year": 1857,
-     "id": "c92"
+     "id": "c92",
+     "pop_rank": 0
     },
     {
      "gid": 93,
@@ -1264,7 +1356,8 @@
      "cover": "https://covers.openlibrary.org/b/id/260220-L.jpg",
      "isbn": "9781984816573",
      "year": 1986,
-     "id": "c93"
+     "id": "c93",
+     "pop_rank": 0
     },
     {
      "gid": 94,
@@ -1276,7 +1369,8 @@
      "cover": "https://covers.openlibrary.org/b/id/12055-L.jpg",
      "isbn": "9780582471542",
      "year": 1957,
-     "id": "c94"
+     "id": "c94",
+     "pop_rank": 55
     },
     {
      "gid": 95,
@@ -1288,7 +1382,8 @@
      "cover": "https://covers.openlibrary.org/b/id/394670-L.jpg",
      "isbn": "9780544457980",
      "year": 1985,
-     "id": "c95"
+     "id": "c95",
+     "pop_rank": 49
     }
    ]
   },
@@ -1308,7 +1403,8 @@
      "cover": "https://covers.openlibrary.org/b/id/9662881-L.jpg",
      "isbn": "0859538958",
      "year": 2001,
-     "id": "c96"
+     "id": "c96",
+     "pop_rank": 0
     },
     {
      "gid": 97,
@@ -1320,7 +1416,8 @@
      "cover": "https://covers.openlibrary.org/b/id/323280-L.jpg",
      "isbn": "0517566443",
      "year": 1987,
-     "id": "c97"
+     "id": "c97",
+     "pop_rank": 0
     },
     {
      "gid": 98,
@@ -1332,7 +1429,8 @@
      "cover": "https://covers.openlibrary.org/b/id/625653-L.jpg",
      "isbn": "9780823422272",
      "year": 2005,
-     "id": "c98"
+     "id": "c98",
+     "pop_rank": 0
     },
     {
      "gid": 99,
@@ -1344,7 +1442,8 @@
      "cover": "https://covers.openlibrary.org/b/id/255219-L.jpg",
      "isbn": "9780394929200",
      "year": 1974,
-     "id": "c99"
+     "id": "c99",
+     "pop_rank": 0
     },
     {
      "gid": 100,
@@ -1356,7 +1455,8 @@
      "cover": "https://covers.openlibrary.org/b/id/402285-L.jpg",
      "isbn": "9780590448482",
      "year": 1960,
-     "id": "c100"
+     "id": "c100",
+     "pop_rank": 0
     }
    ]
   },
@@ -1376,7 +1476,8 @@
      "cover": "https://covers.openlibrary.org/b/id/259959-L.jpg",
      "isbn": "0399237194",
      "year": 1984,
-     "id": "c101"
+     "id": "c101",
+     "pop_rank": 0
     },
     {
      "gid": 102,
@@ -1388,7 +1489,8 @@
      "cover": "https://covers.openlibrary.org/b/id/5547791-L.jpg",
      "isbn": "0545277949",
      "year": 2009,
-     "id": "c102"
+     "id": "c102",
+     "pop_rank": 0
     },
     {
      "gid": 103,
@@ -1400,7 +1502,8 @@
      "cover": "https://covers.openlibrary.org/b/id/2243425-L.jpg",
      "isbn": "9780808594345",
      "year": 1971,
-     "id": "c103"
+     "id": "c103",
+     "pop_rank": 0
     },
     {
      "gid": 104,
@@ -1412,7 +1515,8 @@
      "cover": "https://covers.openlibrary.org/b/id/8610594-L.jpg",
      "isbn": "9781338734225",
      "year": 2018,
-     "id": "c104"
+     "id": "c104",
+     "pop_rank": 0
     },
     {
      "gid": 105,
@@ -1424,7 +1528,8 @@
      "cover": "https://covers.openlibrary.org/b/id/673400-L.jpg",
      "isbn": "0439437490",
      "year": 1993,
-     "id": "c105"
+     "id": "c105",
+     "pop_rank": 0
     }
    ]
   },
@@ -1444,7 +1549,8 @@
      "cover": "https://covers.openlibrary.org/b/id/8315344-L.jpg",
      "isbn": "9780385383691",
      "year": 2014,
-     "id": "c106"
+     "id": "c106",
+     "pop_rank": 0
     },
     {
      "gid": 107,
@@ -1456,7 +1562,8 @@
      "cover": "https://covers.openlibrary.org/b/id/507595-L.jpg",
      "isbn": "0761166173",
      "year": 2000,
-     "id": "c107"
+     "id": "c107",
+     "pop_rank": 53
     },
     {
      "gid": 108,
@@ -1468,7 +1575,8 @@
      "cover": "https://covers.openlibrary.org/b/id/114437-L.jpg",
      "isbn": "9577623263",
      "year": 1984,
-     "id": "c108"
+     "id": "c108",
+     "pop_rank": 0
     },
     {
      "gid": 109,
@@ -1480,7 +1588,8 @@
      "cover": "https://covers.openlibrary.org/b/id/2269809-L.jpg",
      "isbn": "0590930036",
      "year": 1998,
-     "id": "c109"
+     "id": "c109",
+     "pop_rank": 0
     },
     {
      "gid": 110,
@@ -1492,7 +1601,8 @@
      "cover": "https://covers.openlibrary.org/b/id/24574-L.jpg",
      "isbn": "006133538X",
      "year": 1998,
-     "id": "c110"
+     "id": "c110",
+     "pop_rank": 0
     }
    ]
   },
@@ -1512,7 +1622,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6934884-L.jpg",
      "isbn": "0811879542",
      "year": 2011,
-     "id": "c111"
+     "id": "c111",
+     "pop_rank": 80
     },
     {
      "gid": 112,
@@ -1524,7 +1635,8 @@
      "cover": "https://covers.openlibrary.org/b/id/600331-L.jpg",
      "isbn": "9780439318327",
      "year": 2000,
-     "id": "c112"
+     "id": "c112",
+     "pop_rank": 0
     },
     {
      "gid": 113,
@@ -1536,7 +1648,8 @@
      "cover": "https://covers.openlibrary.org/b/id/405632-L.jpg",
      "isbn": "9780689869785",
      "year": 1982,
-     "id": "c113"
+     "id": "c113",
+     "pop_rank": 61
     },
     {
      "gid": 114,
@@ -1548,7 +1661,8 @@
      "cover": "https://covers.openlibrary.org/b/id/6309990-L.jpg",
      "isbn": "0811868656",
      "year": 2009,
-     "id": "c114"
+     "id": "c114",
+     "pop_rank": 0
     },
     {
      "gid": 115,
@@ -1560,7 +1674,8 @@
      "cover": "https://covers.openlibrary.org/b/id/1120591-L.jpg",
      "isbn": "015206091X",
      "year": 2007,
-     "id": "c115"
+     "id": "c115",
+     "pop_rank": 0
     }
    ]
   },
@@ -1580,7 +1695,8 @@
      "cover": "https://covers.openlibrary.org/b/id/8174029-L.jpg",
      "isbn": "1452137358",
      "year": 2014,
-     "id": "c116"
+     "id": "c116",
+     "pop_rank": 0
     },
     {
      "gid": 117,
@@ -1592,7 +1708,8 @@
      "cover": "https://covers.openlibrary.org/b/id/10132794-L.jpg",
      "isbn": "0545644658",
      "year": 2012,
-     "id": "c117"
+     "id": "c117",
+     "pop_rank": 0
     },
     {
      "gid": 118,
@@ -1604,7 +1721,8 @@
      "cover": "https://covers.openlibrary.org/b/id/45783-L.jpg",
      "isbn": "9780061123238",
      "year": 2006,
-     "id": "c118"
+     "id": "c118",
+     "pop_rank": 0
     },
     {
      "gid": 119,
@@ -1616,7 +1734,8 @@
      "cover": "https://covers.openlibrary.org/b/id/7337430-L.jpg",
      "isbn": "1406357766",
      "year": 2014,
-     "id": "c119"
+     "id": "c119",
+     "pop_rank": 102
     },
     {
      "gid": 120,
@@ -1628,7 +1747,8 @@
      "cover": "https://covers.openlibrary.org/b/id/50758-L.jpg",
      "isbn": "0062086529",
      "year": 1955,
-     "id": "c120"
+     "id": "c120",
+     "pop_rank": 73
     }
    ]
   }

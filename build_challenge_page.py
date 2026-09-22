@@ -80,6 +80,8 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;backgroun
 .step .cover.noimg .ph{display:flex}
 .step .cover .chk{position:absolute;inset:0;background:rgba(14,124,123,.55);display:none;align-items:center;justify-content:center;font-size:1.6rem;color:#fff}
 .step.seen .cover .chk{display:flex}
+.step .pop{position:absolute;top:6px;right:6px;background:color-mix(in srgb,var(--ink) 80%,transparent);color:#fff;
+  font-size:.62rem;font-weight:800;padding:2px 6px;border-radius:6px;box-shadow:var(--shadow)}
 .step .tt{font-size:.76rem;font-weight:700;line-height:1.2}
 .step .au{font-size:.68rem;color:var(--ink-soft)}
 .step .rs{font-size:.68rem;color:var(--ink-soft);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
@@ -119,7 +121,8 @@ footer p{color:var(--ink-soft);font-size:.82rem;margin:.3em 0}
     </div>
     <p class="note">※ 120권은 엄마표 영어를 <strong>시작하고 지속하기 위한 큐레이션 코스</strong>예요.
       학습 효과를 보장하는 학습지가 아니라, 좋은 영어책을 충분히 만나는 경험에 초점을 둡니다.
-      한 권을 여러 번 읽어도, 순서를 바꿔도 괜찮아요.</p>
+      한 권을 여러 번 읽어도, 순서를 바꿔도 괜찮아요.<br>
+      표지의 <strong>🌍 인기 #N</strong> 은 전세계 인기 그림책 106권 중 순위예요(배지가 없으면 주제·유형을 채우려 넣은 정전 도서).</p>
 
     <div class="legend" id="legend"></div>
   </section>
@@ -153,6 +156,7 @@ function stepHTML(b){
     <div class="cover" data-id="${b.id}" role="button" tabindex="0" title="봤어요 체크">
       ${b.cover?`<img loading="lazy" src="${esc(b.cover)}" alt="${esc(b.title)}" onerror="_imgErr(this)">`:''}
       <div class="ph"><div class="pt">${esc(b.title)}</div></div>
+      ${b.pop_rank?`<span class="pop">🌍 인기 #${b.pop_rank}</span>`:''}
       <div class="chk">✓</div>
     </div>
     <div class="tt">${esc(b.title)}</div>

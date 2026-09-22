@@ -205,6 +205,15 @@ def ol(title, author):
         time.sleep(DELAY)
     return None, "", ""
 
+# 인기순위 106 매칭용
+def _norm(t):
+    t = t.lower(); t = re.split(r"[:(]", t)[0]; t = t.replace("&","and").replace("'","")
+    return re.sub(r"[^a-z0-9]+"," ",t).strip()
+try:
+    POP = {_norm(b["title"]): b["rank"] for b in json.load(open(os.path.join(HERE,"output","gr_master.json"),encoding="utf-8"))["books"]}
+except Exception:
+    POP = {}
+
 themes, misses, gid = [], [], 0
 for emoji, en, ko, books in CURRICULUM:
     tb = []
@@ -215,7 +224,8 @@ for emoji, en, ko, books in CURRICULUM:
             misses.append(f"{ko}/{title}")
         tb.append({"gid": gid, "tier": tier, "tier_label": TIER_LABELS[tier],
                    "title": title, "author": author, "reason": reason,
-                   "cover": cover, "isbn": isbn, "year": year, "id": "c"+str(gid)})
+                   "cover": cover, "isbn": isbn, "year": year, "id": "c"+str(gid),
+                   "pop_rank": POP.get(_norm(title), 0)})
         time.sleep(DELAY)
     themes.append({"emoji": emoji, "en": en, "ko": ko,
                    "key": re.sub(r"[^a-z0-9]+","-",en.lower()).strip("-"), "books": tb})
