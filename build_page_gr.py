@@ -85,6 +85,12 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
 .hero h1{font-size:clamp(2rem,5.4vw,3.25rem);margin:.35em 0 .3em;font-weight:700}
 .hero p.lead{font-size:1.06rem;color:var(--ink-soft);max-width:62ch}
 .note{font-size:.82rem;color:var(--ink-soft);margin-top:14px;max-width:70ch}
+.cta{display:flex;align-items:center;gap:16px;margin-top:22px;background:linear-gradient(135deg,var(--coral),var(--amber));
+  color:#fff;border-radius:18px;padding:18px 20px;box-shadow:var(--shadow-lg);text-decoration:none;flex-wrap:wrap}
+.cta .big{font-family:'Fraunces',serif;font-weight:700;font-size:1.35rem;line-height:1.15}
+.cta .sm{font-size:.86rem;opacity:.95;margin-top:3px}
+.cta .go{margin-left:auto;background:#fff;color:var(--coral);font-weight:800;font-size:.9rem;
+  padding:10px 18px;border-radius:999px;white-space:nowrap}
 /* 연령대 고르기 */
 .pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:26px}
 .pick button{text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);
@@ -205,6 +211,11 @@ footer p{color:var(--ink-soft);font-size:.82rem;margin:.3em 0}
     <p class="note">※ Goodreads의 board-books·toddler·picture-books 인기 셸프를 합산한 순위입니다.
       국내에서 사기 쉬운 명작 위주라, 노부영·웬디북 등에서 대부분 구하거나 도서관에서 빌릴 수 있어요.
       일부 책에는 국내 공공도서관 대출 데이터도 함께 표시했습니다.</p>
+    <a class="cta" href="https://wh-jaimie.github.io/joy-curation/challenge.html">
+      <div><div class="big">📚 파닉스 전 120권 챌린지</div>
+        <div class="sm">매번 안 고르고 싶다면 — 24개 주제 × 5권, 난이도 계단으로 그냥 따라오세요</div></div>
+      <span class="go">코스 보기 →</span>
+    </a>
   </section>
 
   <section>

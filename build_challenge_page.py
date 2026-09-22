@@ -1,0 +1,224 @@
+# -*- coding: utf-8 -*-
+"""challenge.json -> 파닉스 전 120권 챌린지 코스 페이지 (challenge.html)"""
+import json, os
+HERE = os.path.dirname(os.path.abspath(__file__))
+DATA = os.path.join(HERE, "output", "challenge.json")
+OUT = os.path.join(HERE, "output", "challenge.html")
+data = json.load(open(DATA, encoding="utf-8"))
+payload = json.dumps(data, ensure_ascii=False)
+
+TEMPLATE = r"""<title>파닉스 전 120권 챌린지</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700;800&display=swap');
+:root{
+  --ground:#F6F2E9;--surface:#FFFDF8;--surface-2:#EDE6D6;--ink:#2B2A26;--ink-soft:#6C665A;
+  --line:#E2DAC9;--teal:#0E7C7B;--teal-deep:#0A5E5D;--coral:#E8623C;--amber:#E9A63B;--plum:#8A5A9B;
+  --shadow:0 1px 2px rgba(43,42,38,.06),0 6px 18px rgba(43,42,38,.07);--shadow-lg:0 10px 34px rgba(43,42,38,.14);
+  --t1:#0E9488;--t2:#3E8E7E;--t3:#C9822E;--t4:#E8623C;--t5:#8A5A9B;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#1B1A17;--surface:#242220;--surface-2:#2E2B27;--ink:#F1ECE1;--ink-soft:#A8A090;--line:#3A362F;
+  --teal:#3FB0AE;--teal-deep:#5CC6C4;--coral:#F27E5B;--amber:#F0B857;--plum:#C08FD0;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.4);--shadow-lg:0 12px 38px rgba(0,0,0,.55);
+  --t1:#3FB0AE;--t2:#63B79E;--t3:#E0A84E;--t4:#F27E5B;--t5:#C08FD0;}}
+:root[data-theme="dark"]{
+  --ground:#1B1A17;--surface:#242220;--surface-2:#2E2B27;--ink:#F1ECE1;--ink-soft:#A8A090;--line:#3A362F;
+  --teal:#3FB0AE;--teal-deep:#5CC6C4;--coral:#F27E5B;--amber:#F0B857;--plum:#C08FD0;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 18px rgba(0,0,0,.4);--shadow-lg:0 12px 38px rgba(0,0,0,.55);
+  --t1:#3FB0AE;--t2:#63B79E;--t3:#E0A84E;--t4:#F27E5B;--t5:#C08FD0;}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:'Nunito Sans',system-ui,-apple-system,'Segoe UI',sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;line-height:1.14;text-wrap:balance;margin:0}
+.tnum{font-variant-numeric:tabular-nums}
+a{color:var(--teal-deep)}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;white-space:nowrap}
+.brand .mark{width:30px;height:30px;border-radius:9px;flex:0 0 auto;background:linear-gradient(135deg,var(--coral),var(--amber));display:grid;place-items:center;color:#fff;font-size:1rem;box-shadow:var(--shadow)}
+.top .back{margin-left:auto;font-size:.85rem;font-weight:700;text-decoration:none;border:1px solid var(--line);background:var(--surface);padding:8px 13px;border-radius:999px}
+.themebtn{border:1px solid var(--line);background:var(--surface);color:var(--ink);width:38px;height:38px;border-radius:10px;cursor:pointer;font-size:1rem;flex:0 0 auto}
+.hero{padding-block:42px 8px}
+.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--coral)}
+.hero h1{font-size:clamp(2rem,5.6vw,3.35rem);margin:.35em 0 .3em;font-weight:700}
+.hero p.lead{font-size:1.06rem;color:var(--ink-soft);max-width:60ch}
+/* 진행률 + 코스 */
+.panel{margin-top:24px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}
+.panel .r1{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.panel .big{font-family:'Fraunces',serif;font-weight:700;font-size:1.9rem;color:var(--coral)}
+.panel .sub{font-size:.9rem;color:var(--ink-soft)}
+.panel .reset{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);font:inherit;font-size:.76rem;font-weight:700;padding:6px 12px;border-radius:999px;cursor:pointer}
+.bar{height:14px;border-radius:999px;background:var(--surface-2);overflow:hidden;margin-top:12px}
+.bar>i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--t1),var(--amber),var(--coral));transition:width .4s}
+.course{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.course button{flex:1;min-width:180px;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:13px 15px;cursor:pointer;box-shadow:var(--shadow)}
+.course button.active{border-color:var(--coral);box-shadow:0 0 0 2px var(--coral) inset,var(--shadow)}
+.course .ct{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem}
+.course .cd{font-size:.8rem;color:var(--ink-soft);margin-top:2px}
+.note{font-size:.8rem;color:var(--ink-soft);margin-top:14px;max-width:74ch}
+/* 계단 범례 */
+.legend{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 6px}
+.lg{display:inline-flex;align-items:center;gap:6px;font-size:.75rem;font-weight:700;color:var(--ink-soft)}
+.lg .sw{width:12px;height:12px;border-radius:4px}
+/* 월/주제 */
+.month{margin-top:26px}
+.month>.mh{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;color:var(--coral);margin:0 2px 10px;
+  border-bottom:2px solid var(--line);padding-bottom:6px}
+.theme{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 16px 18px;box-shadow:var(--shadow);margin-bottom:16px}
+.theme .th{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 2px 14px}
+.theme .th .emo{font-size:1.5rem;line-height:1}
+.theme .th h3{font-size:1.2rem}
+.theme .th .en{font-size:.82rem;color:var(--ink-soft);font-weight:700}
+.theme .th .done{margin-left:auto;font-size:.76rem;font-weight:800;color:var(--teal-deep)}
+.ladder{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.step{display:flex;flex-direction:column;gap:6px;position:relative}
+.step .tier{font-size:.66rem;font-weight:800;color:#fff;padding:2px 7px;border-radius:6px;align-self:flex-start}
+.step .cover{position:relative;aspect-ratio:3/4;border-radius:9px;overflow:hidden;background:var(--surface-2);box-shadow:var(--shadow);cursor:pointer}
+.step .cover img{width:100%;height:100%;object-fit:cover;display:block}
+.step .cover .ph{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:8px;text-align:center;color:#fff;background:linear-gradient(150deg,var(--teal),var(--teal-deep))}
+.step .cover .ph .pt{font-family:'Fraunces',serif;font-weight:600;font-size:.72rem;line-height:1.15}
+.step .cover.noimg .ph{display:flex}
+.step .cover .chk{position:absolute;inset:0;background:rgba(14,124,123,.55);display:none;align-items:center;justify-content:center;font-size:1.6rem;color:#fff}
+.step.seen .cover .chk{display:flex}
+.step .tt{font-size:.76rem;font-weight:700;line-height:1.2}
+.step .au{font-size:.68rem;color:var(--ink-soft)}
+.step .rs{font-size:.68rem;color:var(--ink-soft);line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:760px){.ladder{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+  .step .rs{display:none}.step .au{display:none}}
+@media (max-width:520px){.ladder{grid-template-columns:repeat(3,1fr);gap:10px}.step .rs{display:-webkit-box}.step .au{display:block}}
+footer{border-top:1px solid var(--line);margin-top:34px;padding-block:26px 42px}
+footer p{color:var(--ink-soft);font-size:.82rem;margin:.3em 0}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><span class="mark">120</span><span>파닉스 전 120권 챌린지</span></div>
+  <a class="back" href="https://wh-jaimie.github.io/joy-curation/">← 전체 책장</a>
+  <button class="themebtn" id="theme" title="테마 전환">◐</button>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">엄마가 매번 고르지 않아도 되는 코스</div>
+    <h1>파닉스 전 120권,<br>그냥 따라오세요</h1>
+    <p class="lead">뭘 읽지? → 검색 → 후기 → 주문 → 실패 → 또 검색.
+      이 반복을 없앴어요. <strong>24개 주제 × 5권</strong>, 각 5권은 쉬운 책부터 조금 긴 책까지
+      계단식으로 골라 담았습니다. 순서·반복은 자유예요.</p>
+
+    <div class="panel">
+      <div class="r1">
+        <span class="big" id="prBig">0 / 120</span>
+        <span class="sub" id="prSub">읽어준 책을 체크하면 진행률이 쌓여요</span>
+        <button class="reset" id="prReset">기록 초기화</button>
+      </div>
+      <div class="bar"><i id="prBar"></i></div>
+      <div class="course" id="course">
+        <button data-c="1y" class="active"><div class="ct">🚀 1년 코스</div><div class="cd">월 2주제 · 10권 × 12개월</div></button>
+        <button data-c="2y"><div class="ct">🌱 2년 코스</div><div class="cd">월 1주제 · 5권 × 24개월</div></button>
+      </div>
+    </div>
+    <p class="note">※ 120권은 엄마표 영어를 <strong>시작하고 지속하기 위한 큐레이션 코스</strong>예요.
+      학습 효과를 보장하는 학습지가 아니라, 좋은 영어책을 충분히 만나는 경험에 초점을 둡니다.
+      한 권을 여러 번 읽어도, 순서를 바꿔도 괜찮아요.</p>
+
+    <div class="legend" id="legend"></div>
+  </section>
+
+  <section><div id="course-body"></div></section>
+</main>
+
+<footer><div class="wrap">
+  <p><strong>파닉스 전 120권 챌린지</strong> — 조이네 영어 그림책 책장</p>
+  <p>큐레이션: 전세계 인기(Goodreads) + 주제·난이도 설계 · 표지: Open Library</p>
+</div></footer>
+
+<script>
+const P=/*DATA*/;const {themes,tier_labels,total}=P;
+const esc=s=>(s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const tvar=t=>`var(--t${t})`;
+let course='1y';
+// 봤어요 기록
+const KEY='joy-challenge-seen';let seen=new Set();
+try{const r=localStorage.getItem(KEY);if(r)seen=new Set(JSON.parse(r));}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify([...seen]));}catch(e){}};
+window._imgErr=el=>{el.parentElement.classList.add('noimg');el.remove();};
+
+// 범례
+document.getElementById('legend').innerHTML='<span class="lg" style="color:var(--ink)">난이도 계단:</span>'+
+  [1,2,3,4,5].map(t=>`<span class="lg"><span class="sw" style="background:${tvar(t)}"></span>${t}. ${esc(tier_labels[t])}</span>`).join('');
+
+function stepHTML(b){
+  return `<div class="step${seen.has(b.id)?' seen':''}" data-id="${b.id}">
+    <span class="tier" style="background:${tvar(b.tier)}">${b.tier}. ${esc(b.tier_label)}</span>
+    <div class="cover" data-id="${b.id}" role="button" tabindex="0" title="봤어요 체크">
+      ${b.cover?`<img loading="lazy" src="${esc(b.cover)}" alt="${esc(b.title)}" onerror="_imgErr(this)">`:''}
+      <div class="ph"><div class="pt">${esc(b.title)}</div></div>
+      <div class="chk">✓</div>
+    </div>
+    <div class="tt">${esc(b.title)}</div>
+    <div class="au">${esc(b.author)}</div>
+    <div class="rs">${esc(b.reason)}</div>
+  </div>`;
+}
+function themeHTML(t){
+  const done=t.books.filter(b=>seen.has(b.id)).length;
+  return `<div class="theme" data-key="${esc(t.key)}">
+    <div class="th"><span class="emo">${t.emoji}</span><h3>${esc(t.ko)}</h3>
+      <span class="en">${esc(t.en)}</span><span class="done tnum" data-role="done">${done}/5</span></div>
+    <div class="ladder">${t.books.map(stepHTML).join('')}</div>
+  </div>`;
+}
+function renderBody(){
+  const per = course==='1y'?2:1;
+  const months = Math.ceil(themes.length/per);
+  let html='';
+  for(let m=0;m<months;m++){
+    const slice=themes.slice(m*per,m*per+per);
+    html+=`<div class="month"><div class="mh">${m+1}개월차</div>${slice.map(themeHTML).join('')}</div>`;
+  }
+  document.getElementById('course-body').innerHTML=html;
+}
+function updateProgress(){
+  const done=seen.size, pct=Math.round(done/total*100);
+  document.getElementById('prBig').textContent=`${done} / ${total}`;
+  document.getElementById('prBar').style.width=pct+'%';
+  document.getElementById('prSub').textContent = done===0
+    ? '읽어준 책을 체크하면 진행률이 쌓여요'
+    : `${total}권 중 ${done}권 완료 · ${pct}%` + (done>=total?' 🎉 120권 완주!':'');
+}
+function toggle(id){
+  if(seen.has(id))seen.delete(id);else seen.add(id);
+  save();updateProgress();
+  document.querySelectorAll(`.step[data-id="${CSS.escape(id)}"]`).forEach(s=>s.classList.toggle('seen',seen.has(id)));
+  // 주제별 done 갱신
+  document.querySelectorAll('.theme').forEach(th=>{
+    const steps=[...th.querySelectorAll('.step')];
+    const d=steps.filter(s=>s.classList.contains('seen')).length;
+    const el=th.querySelector('[data-role=done]');if(el)el.textContent=`${d}/5`;
+  });
+}
+document.getElementById('course-body').addEventListener('click',e=>{
+  const c=e.target.closest('.cover');if(c)toggle(c.dataset.id);
+});
+document.getElementById('course-body').addEventListener('keydown',e=>{
+  if((e.key==='Enter'||e.key===' ')){const c=e.target.closest('.cover');if(c){e.preventDefault();toggle(c.dataset.id);}}
+});
+document.getElementById('course').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;course=b.dataset.c;
+  document.querySelectorAll('#course button').forEach(x=>x.classList.toggle('active',x===b));renderBody();
+});
+document.getElementById('prReset').addEventListener('click',()=>{
+  if(seen.size&&confirm('챌린지 기록을 모두 지울까요?')){seen.clear();save();updateProgress();renderBody();}
+});
+const root=document.documentElement;
+try{const t=localStorage.getItem('joy-theme');if(t)root.setAttribute('data-theme',t);}catch(e){}
+document.getElementById('theme').addEventListener('click',()=>{
+  const cur=root.getAttribute('data-theme');const dark=cur?cur==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  const n=dark?'light':'dark';root.setAttribute('data-theme',n);try{localStorage.setItem('joy-theme',n);}catch(e){}
+});
+renderBody();updateProgress();
+</script>
+"""
+html_out = TEMPLATE.replace("/*DATA*/", payload)
+with open(OUT, "w", encoding="utf-8") as f:
+    f.write(html_out)
+print(f"생성: {OUT} ({len(html_out)//1024} KB), 120권/24주제")
