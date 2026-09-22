@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>조이네 엄마표영어 스터디 — 이번 달 책</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+body{background:#F6F2E9;color:#2B2A26;font-family:'Nunito Sans',system-ui,-apple-system,'Segoe UI','Malgun Gothic',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+:root{--surface:#FFFDF8;--line:#E2DAC9;--soft:#6C665A;--teal:#0E7C7B;--tealD:#0A5E5D;--coral:#E8623C;--sh:0 1px 2px rgba(43,42,38,.06),0 6px 18px rgba(43,42,38,.07)}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px}
+h1,h2{font-family:Georgia,'Nanum Myeongjo',serif;margin:0;line-height:1.2}
+.hero{padding:44px 0 20px;text-align:center}
+.hero .ml{font-size:.85rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral)}
+.hero .em{font-size:3rem;margin:12px 0;line-height:1}
+.hero h1{font-size:clamp(1.9rem,5vw,2.7rem)}
+.hero .en{color:var(--soft);font-weight:700;margin-top:4px}
+.hero .subj{max-width:60ch;margin:16px auto 0;white-space:pre-wrap}
+.sec{margin-top:26px}.sec h2{font-size:1.3rem;color:var(--tealD);border-bottom:2px solid var(--line);padding-bottom:7px;margin-bottom:14px}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+.book{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--sh);display:flex;flex-direction:column;cursor:pointer;transition:transform .15s,box-shadow .15s}
+.book:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(43,42,38,.14)}
+.book .cv{aspect-ratio:3/4;background:#EDE6D6}.book .cv img{width:100%;height:100%;object-fit:cover;display:block}
+.book .bb{padding:10px 11px 12px;display:flex;flex-direction:column;gap:3px;flex:1}
+.book .ty{font-size:.66rem;font-weight:800;color:#fff;background:var(--teal);align-self:flex-start;padding:2px 7px;border-radius:6px}
+.book .bt{font-family:Georgia,serif;font-weight:700;font-size:.96rem;line-height:1.2;margin-top:4px}
+.book .ba{font-size:.76rem;color:var(--soft)}.book .br{font-size:.8rem;color:var(--soft);margin-top:4px}
+.prose{white-space:pre-wrap}ul.li{margin:0;padding-left:20px}ul.li li{margin:5px 0}
+.expr{list-style:none;padding:0;margin:0}.expr li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:7px 0;box-shadow:var(--sh)}
+.expr .en2{font-weight:700}.expr .ko2{color:var(--soft);font-size:.9rem}
+.empty{color:var(--soft);font-style:italic}
+.notice{max-width:640px;margin:60px auto;background:#fff3cd;border:1px solid #e0c97a;border-radius:12px;padding:18px 20px;color:#6b5900}
+.foot{border-top:1px solid var(--line);margin-top:36px;padding:22px 0 44px;color:var(--soft);font-size:.82rem;text-align:center}
+</style>
+</head>
+<body>
+<div id="app"><div class="wrap"><p class="empty" style="padding:60px 0;text-align:center">불러오는 중…</p></div></div>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var app=document.getElementById('app');
+  function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function notice(msg){app.innerHTML='<div class="wrap"><div class="notice">'+msg+'</div></div>';}
+
+  if(!window.SUPA_ANON||window.SUPA_ANON.indexOf('PASTE')===0){
+    notice('⚙️ 아직 연결 전이에요. <code>docs/study/config.js</code> 에 Supabase <b>anon key</b> 를 넣고, DB(schema.sql·seed.sql)를 실행하면 이 페이지가 채워집니다.');
+    return;
+  }
+  var client=supabase.createClient(window.SUPA_URL, window.SUPA_ANON);
+
+  function sid(){var s;try{s=localStorage.getItem('joy_sid');if(!s){s=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem('joy_sid',s);}}catch(e){s='anon';}return s;}
+  var curKey=null;
+  async function logEvent(type,extra){try{var row={type:type,theme_key:curKey,session_id:sid(),path:location.pathname,meta:extra||null};if(extra&&extra.book_id)row.book_id=extra.book_id;await client.from('events').insert(row);}catch(e){}}
+
+  function parseExpr(t){return (t||'').split(/\n/).map(function(l){return l.trim();}).filter(Boolean).map(function(l){var m=l.split(/\s*[|\-–]\s*/);return {en:m[0]||'',ko:m.slice(1).join(' - ')};});}
+  function parseList(t){return (t||'').split(/\n/).map(function(l){return l.trim();}).filter(Boolean);}
+
+  function render(theme,books,content){
+    curKey=theme.key;
+    var c=content||{};
+    var bh=books.map(function(b){
+      return '<div class="book" data-bid="'+b.id+'" data-title="'+esc(b.title)+'">'+
+        '<div class="cv">'+(b.cover?'<img loading="lazy" src="'+esc(b.cover)+'" alt="'+esc(b.title)+'">':'')+'</div>'+
+        '<div class="bb"><span class="ty">'+esc(b.tier_label)+'</span><div class="bt">'+esc(b.title)+'</div>'+
+        '<div class="ba">'+esc(b.author)+'</div>'+(b.reason?'<div class="br">'+esc(b.reason)+'</div>':'')+'</div></div>';
+    }).join('');
+    var acts=parseList(c.activities),exprs=parseExpr(c.expressions);
+    var h='<div class="wrap">';
+    h+='<div class="hero"><div class="ml">'+(c.month_label?esc(c.month_label):'이번 달 영어책')+'</div>'+
+       '<div class="em">'+esc(theme.emoji)+'</div><h1>'+esc(theme.ko)+'</h1><div class="en">'+esc(theme.en)+'</div>'+
+       (c.subject?'<p class="subj">'+esc(c.subject)+'</p>':'')+'</div>';
+    h+='<div class="sec"><h2>📚 이번 달 5권</h2><div class="books">'+bh+'</div></div>';
+    h+='<div class="sec"><h2>🗣️ 읽어주는 방법</h2>'+(c.read_method?'<div class="prose">'+esc(c.read_method)+'</div>':'<p class="empty">준비 중이에요.</p>')+'</div>';
+    h+='<div class="sec"><h2>🎨 책 활용 아이디어</h2>'+(acts.length?'<ul class="li">'+acts.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>':'<p class="empty">준비 중이에요.</p>')+'</div>';
+    h+='<div class="sec"><h2>💬 관련 영어표현</h2>'+(exprs.length?'<ul class="expr">'+exprs.map(function(e){return '<li><span class="en2">'+esc(e.en)+'</span>'+(e.ko?' <span class="ko2">'+esc(e.ko)+'</span>':'')+'</li>';}).join('')+'</ul>':'<p class="empty">준비 중이에요.</p>')+'</div>';
+    h+='<div class="foot">조이네 엄마표영어 스터디 · 매달 새로운 5권으로 함께해요</div></div>';
+    app.innerHTML=h;
+    app.querySelectorAll('.book').forEach(function(el){el.addEventListener('click',function(){logEvent('book_click',{book_id:+el.dataset.bid,title:el.dataset.title});});});
+    logEvent('page_view',{theme:theme.ko});
+    // 체류시간
+    var start=Date.now();
+    document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden'){logEvent('dwell',{seconds:Math.round((Date.now()-start)/1000)});}});
+  }
+
+  async function load(){
+    try{
+      var st=await client.from('settings').select('current_theme').eq('id',1).maybeSingle();
+      var key=st.data&&st.data.current_theme;
+      if(!key){notice('아직 공개된 주제가 없어요. 관리자 페이지에서 이번 달 주제를 정해주세요.');return;}
+      var th=await client.from('themes').select('*').eq('key',key).maybeSingle();
+      var bk=await client.from('books').select('*').eq('theme_key',key).order('sort');
+      var ct=await client.from('content').select('*').eq('theme_key',key).maybeSingle();
+      if(!th.data){notice('주제 데이터를 찾지 못했어요. seed.sql 을 실행했는지 확인해주세요.');return;}
+      render(th.data, bk.data||[], ct.data);
+    }catch(e){
+      notice('데이터를 불러오지 못했어요. 연결 설정(config.js)과 DB 실행을 확인해주세요.<br><small>'+esc(e.message||e)+'</small>');
+    }
+  }
+  load();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>스터디 관리자 — 조이네 엄마표영어</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0}
+body{background:#F6F2E9;color:#2B2A26;font-family:'Nunito Sans',system-ui,-apple-system,'Segoe UI','Malgun Gothic',sans-serif;line-height:1.55}
+:root{--surface:#FFFDF8;--line:#E2DAC9;--soft:#6C665A;--teal:#0E7C7B;--tealD:#0A5E5D;--coral:#E8623C;--sh:0 1px 2px rgba(43,42,38,.06),0 6px 18px rgba(43,42,38,.07)}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:Georgia,serif;margin:0;line-height:1.2}
+a{color:var(--tealD)}
+.top{position:sticky;top:0;z-index:20;background:rgba(246,242,233,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;padding:11px 18px}
+.brand{font-weight:700;font-family:Georgia,serif}
+.top .sp{margin-left:auto;display:flex;gap:8px;align-items:center}
+.tabs{display:flex;gap:6px}
+.tab{border:1px solid var(--line);background:var(--surface);font:inherit;font-size:.85rem;font-weight:700;padding:7px 13px;border-radius:9px;cursor:pointer;color:var(--soft)}
+.tab.on{background:var(--tealD);color:#fff;border-color:var(--tealD)}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:.85rem;font-weight:700;padding:8px 13px;border-radius:9px;cursor:pointer}
+.btn.cor{background:var(--coral);color:#fff;border-color:var(--coral)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--sh);margin:16px 0}
+label.f{display:block;font-size:.82rem;font-weight:800;color:var(--soft);margin:14px 0 5px}
+input.t,select.t,textarea.t{width:100%;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:.95rem;padding:10px 12px;border-radius:10px}
+textarea.t{min-height:90px;resize:vertical;line-height:1.5}
+.hint{font-size:.76rem;color:var(--soft);margin-top:4px}
+.bk{display:flex;gap:10px;align-items:flex-start;border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}
+.bk img{width:52px;height:70px;object-fit:cover;border-radius:6px;background:#eee;flex:0 0 auto}
+.bk .bf{flex:1;min-width:0}.pill{font-size:.72rem;font-weight:800;color:var(--tealD)}
+.status{font-size:.85rem;font-weight:700}
+.login{max-width:420px;margin:70px auto;text-align:center}
+.kgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:var(--sh)}
+.kpi .n{font-family:Georgia,serif;font-weight:700;font-size:1.7rem;color:var(--tealD)}
+.kpi .l{font-size:.8rem;color:var(--soft)}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--line)}
+th{color:var(--soft);font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
+.hidden{display:none}
+.warn{background:#fff3cd;border:1px solid #e0c97a;border-radius:10px;padding:12px 14px;color:#6b5900;font-size:.88rem}
+</style>
+</head>
+<body>
+<div id="root"><div class="wrap"><p style="padding:60px 0;text-align:center;color:var(--soft)">불러오는 중…</p></div></div>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(function(){
+  var root=document.getElementById('root');
+  function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  if(!window.SUPA_ANON||window.SUPA_ANON.indexOf('PASTE')===0){
+    root.innerHTML='<div class="wrap"><div class="warn" style="margin-top:40px">⚙️ 먼저 <code>config.js</code> 에 Supabase anon key 를 넣고 DB(schema.sql·seed.sql)를 실행하세요.</div></div>';return;
+  }
+  var client=supabase.createClient(window.SUPA_URL, window.SUPA_ANON);
+  var STATE={tab:'content', themes:[], booksByTheme:{}, contentByTheme:{}, current:null, editKey:null, user:null};
+
+  // ---------- AUTH ----------
+  function renderLogin(sentTo){
+    root.innerHTML='<div class="wrap"><div class="login card">'+
+      '<h1>스터디 관리자</h1>'+
+      '<p class="hint" style="margin:10px 0 16px">관리자 이메일로 로그인하세요. 입력하면 <b>매직 링크</b>가 메일로 갑니다.</p>'+
+      (sentTo?('<div class="warn">📧 <b>'+esc(sentTo)+'</b> 로 로그인 링크를 보냈어요. 메일의 링크를 누르면 이 페이지로 돌아옵니다.</div>'):
+        ('<input class="t" id="email" type="email" placeholder="admin@example.com" autocomplete="email">'+
+         '<button class="btn cor" id="send" style="margin-top:12px;width:100%">로그인 링크 받기</button>'+
+         '<div class="status" id="lst" style="margin-top:10px"></div>'))+
+      '</div></div>';
+    var s=document.getElementById('send');
+    if(s)s.addEventListener('click',async function(){
+      var email=(document.getElementById('email').value||'').trim();
+      if(!email){document.getElementById('lst').textContent='이메일을 입력하세요.';return;}
+      document.getElementById('lst').textContent='보내는 중…';
+      var r=await client.auth.signInWithOtp({email:email,options:{emailRedirectTo:location.href.split('#')[0]}});
+      if(r.error)document.getElementById('lst').textContent='실패: '+r.error.message;
+      else renderLogin(email);
+    });
+  }
+
+  async function boot(){
+    var g=await client.auth.getSession();
+    STATE.user=g.data.session?g.data.session.user:null;
+    if(!STATE.user){renderLogin(null);return;}
+    if(window.ADMIN_EMAIL && STATE.user.email && window.ADMIN_EMAIL.toLowerCase()!==STATE.user.email.toLowerCase()){
+      root.innerHTML='<div class="wrap"><div class="warn" style="margin-top:40px">이 계정(<b>'+esc(STATE.user.email)+'</b>)은 관리자가 아니에요. 관리자 이메일로 로그인하세요. <button class="btn" id="lo">로그아웃</button></div></div>';
+      document.getElementById('lo').addEventListener('click',async function(){await client.auth.signOut();boot();});return;
+    }
+    await loadAll();
+    renderApp();
+  }
+  client.auth.onAuthStateChange(function(_e,sess){var u=sess?sess.user:null;if((u&&!STATE.user)||(!u&&STATE.user)){STATE.user=u;boot();}});
+
+  // ---------- DATA ----------
+  async function loadAll(){
+    var th=await client.from('themes').select('*').order('sort');
+    STATE.themes=th.data||[];
+    var bk=await client.from('books').select('*').order('sort');
+    STATE.booksByTheme={};(bk.data||[]).forEach(function(b){(STATE.booksByTheme[b.theme_key]=STATE.booksByTheme[b.theme_key]||[]).push(b);});
+    var ct=await client.from('content').select('*');
+    STATE.contentByTheme={};(ct.data||[]).forEach(function(c){STATE.contentByTheme[c.theme_key]=c;});
+    var st=await client.from('settings').select('*').eq('id',1).maybeSingle();
+    STATE.current=st.data?st.data.current_theme:(STATE.themes[0]&&STATE.themes[0].key);
+    STATE.editKey=STATE.editKey||STATE.current||(STATE.themes[0]&&STATE.themes[0].key);
+  }
+
+  // ---------- SHELL ----------
+  function renderApp(){
+    var h='<div class="top"><div class="wrap"><span class="brand">🛠️ 스터디 관리자</span>'+
+      '<span class="sp"><span class="tabs">'+
+      '<button class="tab '+(STATE.tab==='content'?'on':'')+'" data-tab="content">콘텐츠 관리</button>'+
+      '<button class="tab '+(STATE.tab==='kpi'?'on':'')+'" data-tab="kpi">KPI</button></span>'+
+      '<a class="btn" href="index.html" target="_blank">공유 페이지 ↗</a>'+
+      '<button class="btn" id="logout">로그아웃</button></span></div></div>'+
+      '<div class="wrap" id="body"></div>';
+    root.innerHTML=h;
+    root.querySelectorAll('.tab').forEach(function(t){t.addEventListener('click',function(){STATE.tab=t.dataset.tab;renderApp();});});
+    document.getElementById('logout').addEventListener('click',async function(){await client.auth.signOut();STATE.user=null;renderLogin(null);});
+    if(STATE.tab==='content')renderContent();else renderKPI();
+  }
+
+  // ---------- CONTENT TAB ----------
+  function renderContent(){
+    var body=document.getElementById('body');
+    var opt=function(sel){return STATE.themes.map(function(t){return '<option value="'+t.key+'"'+(t.key===sel?' selected':'')+'>'+esc(t.emoji+' '+t.ko+' ('+t.en+')')+'</option>';}).join('');};
+    body.innerHTML=
+      '<div class="card"><label class="f" style="margin-top:0">이번 달 공개 주제 <span class="hint">(부모가 링크 열면 보이는 주제)</span></label>'+
+        '<div style="display:flex;gap:10px;flex-wrap:wrap"><select class="t" id="curSel" style="flex:1;min-width:220px">'+opt(STATE.current)+'</select>'+
+        '<button class="btn cor" id="setCur">공개 설정</button></div><span class="status" id="curSt"></span></div>'+
+      '<div class="card"><label class="f" style="margin-top:0">편집할 주제</label><select class="t" id="edSel">'+opt(STATE.editKey)+'</select>'+
+        '<div id="form"></div>'+
+        '<div style="display:flex;gap:10px;align-items:center;margin-top:16px"><button class="btn cor" id="save">저장</button><span class="status" id="saveSt"></span></div></div>';
+    document.getElementById('setCur').addEventListener('click',async function(){
+      var k=document.getElementById('curSel').value;
+      document.getElementById('curSt').textContent='설정 중…';
+      var r=await client.from('settings').upsert({id:1,current_theme:k});
+      document.getElementById('curSt').textContent=r.error?('실패: '+r.error.message):('✓ 공개 주제: '+k);
+      if(!r.error)STATE.current=k;
+    });
+    document.getElementById('edSel').addEventListener('change',function(e){STATE.editKey=e.target.value;renderForm();});
+    document.getElementById('save').addEventListener('click',saveContent);
+    renderForm();
+  }
+  function renderForm(){
+    var key=STATE.editKey, c=STATE.contentByTheme[key]||{}, books=STATE.booksByTheme[key]||[];
+    var f=document.getElementById('form');
+    var bh=books.map(function(b,i){
+      return '<div class="bk">'+(b.cover?'<img src="'+esc(b.cover)+'">':'<div style="width:52px;height:70px;background:#eee;border-radius:6px"></div>')+
+        '<div class="bf"><span class="pill">'+esc(b.tier_label)+'</span>'+
+        '<input class="t" style="margin:4px 0" data-bid="'+b.id+'" data-fld="title" value="'+esc(b.title)+'">'+
+        '<input class="t" style="margin-bottom:4px;font-size:.82rem" data-bid="'+b.id+'" data-fld="author" value="'+esc(b.author)+'">'+
+        '<input class="t" style="font-size:.82rem" data-bid="'+b.id+'" data-fld="reason" value="'+esc(b.reason)+'"></div></div>';
+    }).join('');
+    f.innerHTML=
+      '<label class="f">월 라벨 <span class="hint">(예: 2026년 10월 · 1개월차)</span></label><input class="t" id="fml" value="'+esc(c.month_label)+'">'+
+      '<label class="f">주제 소개 (엄마용)</label><textarea class="t" id="fsub" style="min-height:70px">'+esc(c.subject)+'</textarea>'+
+      '<label class="f">읽어주는 방법</label><textarea class="t" id="frm">'+esc(c.read_method)+'</textarea>'+
+      '<label class="f">책 활용 아이디어 <span class="hint">(한 줄에 하나)</span></label><textarea class="t" id="fact">'+esc(c.activities)+'</textarea>'+
+      '<label class="f">관련 영어표현 <span class="hint">(한 줄에 하나 · "English - 한글")</span></label><textarea class="t" id="fexp">'+esc(c.expressions)+'</textarea>'+
+      '<label class="f">이번 주제 5권 (수정 가능)</label>'+bh;
+  }
+  async function saveContent(){
+    var key=STATE.editKey, st=document.getElementById('saveSt');
+    st.textContent='저장 중…';
+    var content={theme_key:key,month_label:val('fml'),subject:val('fsub'),read_method:val('frm'),activities:val('fact'),expressions:val('fexp'),updated_at:new Date().toISOString()};
+    var r1=await client.from('content').upsert(content);
+    if(r1.error){st.textContent='실패: '+r1.error.message;return;}
+    // 책 업데이트
+    var inputs=document.querySelectorAll('#form input[data-bid]'), byId={};
+    inputs.forEach(function(inp){var id=inp.dataset.bid;(byId[id]=byId[id]||{id:+id})[inp.dataset.fld]=inp.value;});
+    var errs=0;
+    for(var id in byId){var u=byId[id];var r=await client.from('books').update({title:u.title,author:u.author,reason:u.reason}).eq('id',u.id);if(r.error)errs++;}
+    STATE.contentByTheme[key]=content;
+    (STATE.booksByTheme[key]||[]).forEach(function(b){var u=byId[b.id];if(u){b.title=u.title;b.author=u.author;b.reason=u.reason;}});
+    st.textContent=errs?('내용 저장됨, 책 '+errs+'건 실패'):'✓ 저장 완료';
+  }
+  function val(id){var e=document.getElementById(id);return e?e.value:'';}
+
+  // ---------- KPI TAB ----------
+  async function renderKPI(){
+    var body=document.getElementById('body');
+    body.innerHTML='<div class="card"><p class="status">KPI 불러오는 중…</p></div>';
+    var r=await client.from('events').select('*').order('created_at',{ascending:false}).limit(5000);
+    if(r.error){body.innerHTML='<div class="card"><div class="warn">KPI 조회 실패: '+esc(r.error.message)+'<br>(RLS의 admin read events 정책 + 관리자 이메일 확인)</div></div>';return;}
+    var ev=r.data||[];
+    var pv=ev.filter(function(e){return e.type==='page_view';});
+    var sess={};pv.forEach(function(e){if(e.session_id)sess[e.session_id]=1;});
+    var perTheme={};pv.forEach(function(e){var k=e.theme_key||'?';perTheme[k]=(perTheme[k]||0)+1;});
+    var clicks={};ev.filter(function(e){return e.type==='book_click';}).forEach(function(e){var t=(e.meta&&e.meta.title)||('#'+e.book_id);clicks[t]=(clicks[t]||0)+1;});
+    var dwell=ev.filter(function(e){return e.type==='dwell'&&e.meta&&e.meta.seconds;}).map(function(e){return e.meta.seconds;});
+    var avgD=dwell.length?Math.round(dwell.reduce(function(a,b){return a+b;},0)/dwell.length):0;
+    function rows(obj){return Object.keys(obj).sort(function(a,b){return obj[b]-obj[a];}).map(function(k){return '<tr><td>'+esc(k)+'</td><td>'+obj[k]+'</td></tr>';}).join('')||'<tr><td colspan=2 class="hint">데이터 없음</td></tr>';}
+    var themeName={};STATE.themes.forEach(function(t){themeName[t.key]=t.emoji+' '+t.ko;});
+    var perThemeNamed={};Object.keys(perTheme).forEach(function(k){perThemeNamed[themeName[k]||k]=perTheme[k];});
+    var recent=ev.slice(0,20).map(function(e){return '<tr><td>'+esc(new Date(e.created_at).toLocaleString('ko-KR'))+'</td><td>'+esc(e.type)+'</td><td>'+esc(e.theme_key||'')+'</td><td>'+esc((e.meta&&(e.meta.title||e.meta.seconds))||'')+'</td></tr>';}).join('');
+    body.innerHTML=
+      '<div class="card"><div class="kgrid">'+
+        kpi(pv.length,'페이지 방문')+kpi(Object.keys(sess).length,'순 방문자(세션)')+
+        kpi(ev.filter(function(e){return e.type==='book_click';}).length,'책 클릭')+kpi(avgD+'s','평균 체류')+
+      '</div></div>'+
+      '<div class="card"><h3>주제별 방문</h3><table><thead><tr><th>주제</th><th>방문</th></tr></thead><tbody>'+rows(perThemeNamed)+'</tbody></table></div>'+
+      '<div class="card"><h3>많이 클릭한 책</h3><table><thead><tr><th>책</th><th>클릭</th></tr></thead><tbody>'+rows(clicks)+'</tbody></table></div>'+
+      '<div class="card"><h3>최근 이벤트</h3><table><thead><tr><th>시각</th><th>유형</th><th>주제</th><th>비고</th></tr></thead><tbody>'+(recent||'<tr><td colspan=4 class="hint">아직 없음</td></tr>')+'</tbody></table></div>';
+  }
+  function kpi(n,l){return '<div class="kpi"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>';}
+
+  boot();
+})();
+</script>
+</body>
+</html>
