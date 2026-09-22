@@ -1,0 +1,232 @@
+<style id="appcss">
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:#F6F2E9;color:#2B2A26;font-family:'Nunito Sans',system-ui,-apple-system,'Segoe UI',AppleSDGothicNeo,'Malgun Gothic',sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+:root{--surface:#FFFDF8;--line:#E2DAC9;--ink:#2B2A26;--soft:#6C665A;--teal:#0E7C7B;--tealD:#0A5E5D;--coral:#E8623C;--amber:#E9A63B;--sh:0 1px 2px rgba(43,42,38,.06),0 6px 18px rgba(43,42,38,.07);--shL:0 10px 34px rgba(43,42,38,.14)}
+.wrap{max-width:940px;margin:0 auto;padding:0 18px}
+h1,h2,h3{font-family:Georgia,'Nanum Myeongjo',serif;margin:0;line-height:1.2}
+a{color:var(--tealD)}
+.tag{display:inline-block;font-size:.7rem;font-weight:800;color:#fff;padding:2px 8px;border-radius:6px}
+/* header */
+.top{position:sticky;top:0;z-index:20;background:rgba(246,242,233,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:12px;padding:11px 18px}
+.brand{font-family:Georgia,serif;font-weight:700}
+.top .sp{margin-left:auto;display:flex;gap:8px}
+.btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:.85rem;font-weight:700;padding:8px 13px;border-radius:9px;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.pri{background:var(--tealD);color:#fff;border-color:var(--tealD)}
+.btn.cor{background:var(--coral);color:#fff;border-color:var(--coral)}
+/* admin */
+.adm{padding:22px 0 60px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--sh);margin-bottom:16px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+label.f{display:block;font-size:.82rem;font-weight:800;color:var(--soft);margin:14px 0 5px}
+input.t,select.t,textarea.t{width:100%;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:.95rem;padding:10px 12px;border-radius:10px}
+textarea.t{min-height:90px;resize:vertical;line-height:1.5}
+.hint{font-size:.76rem;color:var(--soft);margin-top:4px}
+.bk{display:flex;gap:10px;align-items:flex-start;border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}
+.bk img{width:52px;height:70px;object-fit:cover;border-radius:6px;flex:0 0 auto;background:#eee}
+.bk .bf{flex:1;min-width:0}
+.status{font-size:.85rem;font-weight:700;margin-left:auto}
+.pill{font-size:.72rem;font-weight:800;color:var(--tealD)}
+/* share page */
+.share{padding:0 0 60px}
+.hero{padding:40px 0 22px;text-align:center}
+.hero .ml{font-size:.85rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--coral)}
+.hero .em{font-size:3rem;line-height:1;margin:12px 0}
+.hero h1{font-size:clamp(1.9rem,5vw,2.7rem)}
+.hero .en{color:var(--soft);font-weight:700;margin-top:4px}
+.hero .subj{max-width:60ch;margin:16px auto 0;color:var(--ink)}
+.sec{margin-top:26px}
+.sec h2{font-size:1.3rem;color:var(--tealD);border-bottom:2px solid var(--line);padding-bottom:7px;margin-bottom:14px}
+.books{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
+.book{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden;box-shadow:var(--sh);display:flex;flex-direction:column}
+.book .cv{aspect-ratio:3/4;background:#EDE6D6}
+.book .cv img{width:100%;height:100%;object-fit:cover;display:block}
+.book .bb{padding:10px 11px 12px;display:flex;flex-direction:column;gap:3px;flex:1}
+.book .ty{font-size:.66rem;font-weight:800;color:#fff;background:var(--teal);align-self:flex-start;padding:2px 7px;border-radius:6px}
+.book .bt{font-family:Georgia,serif;font-weight:700;font-size:.96rem;line-height:1.2;margin-top:4px}
+.book .ba{font-size:.76rem;color:var(--soft)}
+.book .br{font-size:.8rem;color:var(--soft);margin-top:4px}
+.prose{white-space:pre-wrap}
+ul.li{margin:0;padding-left:20px}
+ul.li li{margin:5px 0}
+.expr{list-style:none;padding:0;margin:0}
+.expr li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:7px 0;box-shadow:var(--sh)}
+.expr .en2{font-weight:700}
+.expr .ko2{color:var(--soft);font-size:.9rem}
+.empty{color:var(--soft);font-style:italic}
+.foot{border-top:1px solid var(--line);margin-top:36px;padding:22px 0 44px;color:var(--soft);font-size:.82rem;text-align:center}
+@media print{.top,.noprint{display:none}.share{padding-top:10px}}
+</style>
+
+<div id="app"></div>
+
+<script type="application/json" id="APP_DATA">{"meta": {"current": "animals"}, "order": ["animals", "vehicles", "food", "colors", "numbers", "family", "bedtime", "feelings", "body", "bugs", "dinosaurs", "nature", "weather-seasons", "pets", "farm", "ocean", "monsters", "halloween", "christmas", "songs-rhymes", "school-friends", "daily-routine", "opposites-concepts", "imagination"], "themes": {"animals": {"emoji": "🐻", "en": "Animals", "ko": "동물", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Dear Zoo", "author": "Rod Campbell", "cover": "https://covers.openlibrary.org/b/id/10577107-L.jpg", "reason": "플랩을 열면 동물원이 보낸 동물이 나오는 국민 플랩북"}, {"tier_label": "라임", "title": "Giraffes Can't Dance", "author": "Giles Andreae", "cover": "https://covers.openlibrary.org/b/id/276948-L.jpg", "reason": "춤 못 추던 기린의 자신감 라임 이야기"}, {"tier_label": "반복", "title": "Brown Bear, Brown Bear, What Do You See?", "author": "Bill Martin Jr.", "cover": "https://covers.openlibrary.org/b/id/12624136-L.jpg", "reason": "색+동물+\"What do you see?\" 반복의 정석"}, {"tier_label": "유머·반전", "title": "Moo, Baa, La La La!", "author": "Sandra Boynton", "cover": "https://covers.openlibrary.org/b/id/437901-L.jpg", "reason": "동물 소리를 흉내 내다 반전으로 깔깔"}, {"tier_label": "스토리", "title": "The Mixed-Up Chameleon", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/3153851-L.jpg", "reason": "이것저것 되고 싶던 카멜레온 이야기"}]}, "vehicles": {"emoji": "🚗", "en": "Vehicles", "ko": "탈것", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "That's Not My Truck", "author": "Fiona Watt", "cover": "https://covers.openlibrary.org/b/id/2582595-L.jpg", "reason": "촉감을 만지며 \"내 트럭이 아니야\" 반복하는 촉감북"}, {"tier_label": "라임", "title": "Sheep in a Jeep", "author": "Nancy Shaw", "cover": "https://covers.openlibrary.org/b/id/255747-L.jpg", "reason": "지프 탄 양떼의 좌충우돌 라임"}, {"tier_label": "반복", "title": "Little Blue Truck", "author": "Alice Schertle", "cover": "https://covers.openlibrary.org/b/id/2325432-L.jpg", "reason": "\"Beep!\" 소리와 동물이 반복되는 파랑 트럭"}, {"tier_label": "유머·반전", "title": "Don't Let the Pigeon Drive the Bus!", "author": "Mo Willems", "cover": "https://covers.openlibrary.org/b/id/544664-L.jpg", "reason": "버스 몰고 싶은 비둘기에게 \"No!\" 외치는 참여형 유머"}, {"tier_label": "스토리", "title": "Goodnight, Goodnight, Construction Site", "author": "Sherri Duskey Rinker", "cover": "https://covers.openlibrary.org/b/id/7351895-L.jpg", "reason": "공사장 차들이 하루를 마치고 잠드는 이야기"}]}, "food": {"emoji": "🍎", "en": "Food", "ko": "음식", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "The Very Hungry Caterpillar", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/7835968-L.jpg", "reason": "구멍 뚫린 페이지를 만지며 먹이를 따라가는 책"}, {"tier_label": "라임", "title": "Jamberry", "author": "Bruce Degen", "cover": "https://covers.openlibrary.org/b/id/445220-L.jpg", "reason": "곰과 소년이 베리를 따는 말놀이 라임"}, {"tier_label": "반복", "title": "Today Is Monday", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/259485-L.jpg", "reason": "요일마다 음식이 쌓이는 노래 반복"}, {"tier_label": "유머·반전", "title": "Dragons Love Tacos", "author": "Adam Rubin", "cover": "https://covers.openlibrary.org/b/id/8085856-L.jpg", "reason": "타코 좋아하는 용이 매운 살사에 대참사"}, {"tier_label": "스토리", "title": "Cloudy with a Chance of Meatballs", "author": "Judi Barrett", "cover": "https://covers.openlibrary.org/b/id/6475217-L.jpg", "reason": "하늘에서 음식이 내리는 마을 이야기"}]}, "colors": {"emoji": "🌈", "en": "Colors", "ko": "색깔", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Lemons Are Not Red", "author": "Laura Vaccaro Seeger", "cover": "https://covers.openlibrary.org/b/id/9347233-L.jpg", "reason": "구멍(다이컷)으로 색이 바뀌는 놀이책"}, {"tier_label": "라임", "title": "Mary Wore Her Red Dress", "author": "Merle Peek", "cover": "https://covers.openlibrary.org/b/id/5019277-L.jpg", "reason": "색깔 옷을 노래하는 반복 라임"}, {"tier_label": "반복", "title": "I Went Walking", "author": "Sue Williams", "cover": "https://covers.openlibrary.org/b/id/112796-L.jpg", "reason": "\"What did you see?\"로 색깔 동물이 이어지는 반복"}, {"tier_label": "유머·반전", "title": "Blue Hat, Green Hat", "author": "Sandra Boynton", "cover": "https://covers.openlibrary.org/b/id/438047-L.jpg", "reason": "옷을 엉뚱하게 입는 칠면조의 \"Oops!\""}, {"tier_label": "스토리", "title": "A Color of His Own", "author": "Leo Lionni", "cover": "https://covers.openlibrary.org/b/id/7395995-L.jpg", "reason": "자기 색을 찾고 싶은 카멜레온 이야기"}]}, "numbers": {"emoji": "🔢", "en": "Numbers", "ko": "숫자", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Ten Little Ladybugs", "author": "Melanie Gerth", "cover": "https://covers.openlibrary.org/b/id/841692-L.jpg", "reason": "볼록한 무당벌레를 만지며 거꾸로 세는 촉감북"}, {"tier_label": "라임", "title": "Five Little Ducks", "author": "Raffi", "cover": "https://covers.openlibrary.org/b/id/6974006-L.jpg", "reason": "새끼 오리가 하나씩 사라지는 노래 라임"}, {"tier_label": "반복", "title": "Ten Black Dots", "author": "Donald Crews", "cover": "https://covers.openlibrary.org/b/id/6637747-L.jpg", "reason": "점 개수로 사물을 만드는 반복 카운팅"}, {"tier_label": "유머·반전", "title": "Ten Apples Up on Top!", "author": "Dr. Seuss", "cover": "https://covers.openlibrary.org/b/id/423601-L.jpg", "reason": "머리에 사과를 쌓는 좌충우돌 라임"}, {"tier_label": "스토리", "title": "Five Little Monkeys Jumping on the Bed", "author": "Eileen Christelow", "cover": "https://covers.openlibrary.org/b/id/5547929-L.jpg", "reason": "침대에서 뛰다 다치는 원숭이 이야기"}]}, "family": {"emoji": "👨‍👩‍👧", "en": "Family", "ko": "가족", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Where Is Baby's Mommy?", "author": "Karen Katz", "cover": "https://covers.openlibrary.org/b/id/435920-L.jpg", "reason": "플랩을 열며 엄마를 찾는 플랩북"}, {"tier_label": "라임", "title": "Is Your Mama a Llama?", "author": "Deborah Guarino", "cover": "https://covers.openlibrary.org/b/id/383707-L.jpg", "reason": "\"너희 엄마는 라마야?\" 추측하는 라임"}, {"tier_label": "반복", "title": "Are You My Mother?", "author": "P.D. Eastman", "cover": "https://covers.openlibrary.org/b/id/254626-L.jpg", "reason": "아기 새가 \"우리 엄마야?\" 반복하며 찾기"}, {"tier_label": "유머·반전", "title": "My Mum", "author": "Anthony Browne", "cover": "https://covers.openlibrary.org/b/id/243308-L.jpg", "reason": "엄마가 얼마나 대단한지 과장해 그린 따뜻한 유머"}, {"tier_label": "스토리", "title": "Guess How Much I Love You", "author": "Sam McBratney", "cover": "https://covers.openlibrary.org/b/id/13282906-L.jpg", "reason": "사랑의 크기를 재보는 토끼 이야기"}]}, "bedtime": {"emoji": "🌙", "en": "Bedtime", "ko": "잠자리", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Tuck Me In!", "author": "Dean Hacohen", "cover": "https://covers.openlibrary.org/b/id/10817286-L.jpg", "reason": "이불(플랩)을 덮어주며 동물을 재우는 플랩북"}, {"tier_label": "라임", "title": "The Going to Bed Book", "author": "Sandra Boynton", "cover": "https://covers.openlibrary.org/b/id/438326-L.jpg", "reason": "잘 준비 순서를 노래하는 라임"}, {"tier_label": "반복", "title": "Goodnight Moon", "author": "Margaret Wise Brown", "cover": "https://covers.openlibrary.org/b/id/35556-L.jpg", "reason": "방 안 사물에 \"굿나잇\"을 반복하는 잠자리 고전"}, {"tier_label": "유머·반전", "title": "How Do Dinosaurs Say Good Night?", "author": "Jane Yolen", "cover": "https://covers.openlibrary.org/b/id/7092593-L.jpg", "reason": "공룡의 우스운 잠투정"}, {"tier_label": "스토리", "title": "Time for Bed", "author": "Mem Fox", "cover": "https://covers.openlibrary.org/b/id/114082-L.jpg", "reason": "동물 엄마가 아기를 재우는 잔잔한 이야기"}]}, "feelings": {"emoji": "😊", "en": "Feelings", "ko": "감정", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Glad Monster, Sad Monster", "author": "Ed Emberley", "cover": "https://covers.openlibrary.org/b/id/189297-L.jpg", "reason": "감정 가면을 써보는 참여형 책"}, {"tier_label": "라임", "title": "The Way I Feel", "author": "Janan Cain", "cover": "https://covers.openlibrary.org/b/id/6815337-L.jpg", "reason": "다양한 감정을 라임으로 소개"}, {"tier_label": "반복", "title": "The Feelings Book", "author": "Todd Parr", "cover": "https://covers.openlibrary.org/b/id/2379677-L.jpg", "reason": "\"가끔 나는…\" 반복으로 감정 어휘"}, {"tier_label": "유머·반전", "title": "The Pigeon Has Feelings, Too!", "author": "Mo Willems", "cover": "https://covers.openlibrary.org/b/id/544896-L.jpg", "reason": "비둘기의 널뛰는 감정을 웃기게"}, {"tier_label": "스토리", "title": "The Color Monster", "author": "Anna Llenas", "cover": "https://covers.openlibrary.org/b/isbn/9780316574525-L.jpg", "reason": "뒤죽박죽 감정을 색으로 정리하는 이야기"}]}, "body": {"emoji": "👣", "en": "Body", "ko": "몸", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Where Is Baby's Belly Button?", "author": "Karen Katz", "cover": "https://covers.openlibrary.org/b/id/12954864-L.jpg", "reason": "플랩으로 신체 부위를 찾는 플랩북"}, {"tier_label": "라임", "title": "Here Are My Hands", "author": "Bill Martin Jr.", "cover": "https://covers.openlibrary.org/b/id/580246-L.jpg", "reason": "몸의 각 부분을 소개하는 라임"}, {"tier_label": "반복", "title": "From Head to Toe", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/10672062-L.jpg", "reason": "\"Can you do it?\" 동작을 따라하는 반복"}, {"tier_label": "유머·반전", "title": "Belly Button Book", "author": "Sandra Boynton", "cover": "https://covers.openlibrary.org/b/id/6815719-L.jpg", "reason": "하마들의 배꼽 노래 유머"}, {"tier_label": "스토리", "title": "Ten Little Fingers and Ten Little Toes", "author": "Mem Fox", "cover": "https://covers.openlibrary.org/b/id/10978432-L.jpg", "reason": "세계 아기들의 손발가락 이야기"}]}, "bugs": {"emoji": "🐛", "en": "Bugs", "ko": "곤충", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "The Very Busy Spider", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/1199659-L.jpg", "reason": "볼록한 거미줄을 만지며 보는 촉감북"}, {"tier_label": "라임", "title": "Some Bugs", "author": "Angela DiTerlizzi", "cover": "https://covers.openlibrary.org/b/id/11322377-L.jpg", "reason": "뒷마당 곤충들을 소개하는 라임"}, {"tier_label": "반복", "title": "There Was an Old Lady Who Swallowed a Fly", "author": "Pam Adams", "cover": "https://covers.openlibrary.org/b/id/651393-L.jpg", "reason": "파리를 삼킨 할머니의 누적 반복"}, {"tier_label": "유머·반전", "title": "The Grouchy Ladybug", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/51010-L.jpg", "reason": "싸움 걸다 망신당하는 심술 무당벌레"}, {"tier_label": "스토리", "title": "The Very Quiet Cricket", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/259476-L.jpg", "reason": "소리를 못 내던 귀뚜라미 이야기"}]}, "dinosaurs": {"emoji": "🦖", "en": "Dinosaurs", "ko": "공룡", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "That's Not My Dinosaur", "author": "Fiona Watt", "cover": "https://covers.openlibrary.org/b/id/560373-L.jpg", "reason": "공룡 촉감을 만지는 촉감북"}, {"tier_label": "라임", "title": "Dinosaur Roar!", "author": "Paul Stickland", "cover": "https://covers.openlibrary.org/b/id/360902-L.jpg", "reason": "크다/작다 반대말을 공룡 라임으로"}, {"tier_label": "반복", "title": "Dinosaur Dance!", "author": "Sandra Boynton", "cover": "https://covers.openlibrary.org/b/id/7442591-L.jpg", "reason": "공룡들이 춤추는 리듬 반복"}, {"tier_label": "유머·반전", "title": "Dinosaur vs. Bedtime", "author": "Bob Shea", "cover": "https://covers.openlibrary.org/b/id/5723134-L.jpg", "reason": "뭐든 이기는 공룡, 잠자리엔 질까?"}, {"tier_label": "스토리", "title": "Tyrannosaurus Drip", "author": "Julia Donaldson", "cover": "https://covers.openlibrary.org/b/id/13257873-L.jpg", "reason": "초식 공룡 무리에서 자란 티라노 이야기"}]}, "nature": {"emoji": "🌱", "en": "Nature", "ko": "자연·정원", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Tap the Magic Tree", "author": "Christie Matheson", "cover": "https://covers.openlibrary.org/b/id/7848721-L.jpg", "reason": "두드리고 흔들면 나무가 변하는 참여형"}, {"tier_label": "라임", "title": "Flower Garden", "author": "Eve Bunting", "cover": "https://covers.openlibrary.org/b/id/10219853-L.jpg", "reason": "창가 화분을 가꾸는 라임"}, {"tier_label": "반복", "title": "The Carrot Seed", "author": "Ruth Krauss", "cover": "https://covers.openlibrary.org/b/id/10935277-L.jpg", "reason": "\"안 나올 거야\" 반복 속 믿음의 씨앗"}, {"tier_label": "유머·반전", "title": "Jasper's Beanstalk", "author": "Nick Butterworth", "cover": "https://covers.openlibrary.org/b/id/8364400-L.jpg", "reason": "성급한 고양이의 콩 심기 소동"}, {"tier_label": "스토리", "title": "The Tiny Seed", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/3267631-L.jpg", "reason": "작은 씨앗의 사계절 여행"}]}, "weather-seasons": {"emoji": "🌦️", "en": "Weather & Seasons", "ko": "날씨·계절", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Maisy's Wonderful Weather Book", "author": "Lucy Cousins", "cover": "https://covers.openlibrary.org/b/id/516665-L.jpg", "reason": "플랩·바퀴로 날씨를 배우는 메이지 조작북"}, {"tier_label": "라임", "title": "Rain!", "author": "Linda Ashman", "cover": "https://covers.openlibrary.org/b/id/10351371-L.jpg", "reason": "비 오는 날 할아버지와 아이의 라임"}, {"tier_label": "반복", "title": "It Looked Like Spilt Milk", "author": "Charles G. Shaw", "cover": "https://covers.openlibrary.org/b/id/50834-L.jpg", "reason": "\"가끔 이렇게 보였어\" 반복하는 구름책"}, {"tier_label": "유머·반전", "title": "Snowmen at Night", "author": "Caralyn Buehner", "cover": "https://covers.openlibrary.org/b/id/575397-L.jpg", "reason": "밤에 노는 눈사람들의 상상 유머"}, {"tier_label": "스토리", "title": "The Snowy Day", "author": "Ezra Jack Keats", "cover": "https://covers.openlibrary.org/b/id/10134995-L.jpg", "reason": "눈 오는 날의 잔잔한 하루"}]}, "pets": {"emoji": "🐶", "en": "Pets", "ko": "반려동물", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Where's Spot?", "author": "Eric Hill", "cover": "https://covers.openlibrary.org/b/id/1199330-L.jpg", "reason": "플랩으로 강아지 스팟을 찾는 고전 플랩북"}, {"tier_label": "라임", "title": "Hairy Maclary from Donaldson's Dairy", "author": "Lynley Dodd", "cover": "https://covers.openlibrary.org/b/id/6815361-L.jpg", "reason": "동네 개들이 줄줄이 나오는 라임"}, {"tier_label": "반복", "title": "Go, Dog. Go!", "author": "P.D. Eastman", "cover": "https://covers.openlibrary.org/b/id/2078976-L.jpg", "reason": "쉬운 단어가 반복되는 개들의 소동"}, {"tier_label": "유머·반전", "title": "Bark, George", "author": "Jules Feiffer", "cover": "https://covers.openlibrary.org/b/id/48152-L.jpg", "reason": "엉뚱한 소리를 내는 강아지의 반전 유머"}, {"tier_label": "스토리", "title": "Harry the Dirty Dog", "author": "Gene Zion", "cover": "https://covers.openlibrary.org/b/id/24282-L.jpg", "reason": "목욕 싫어 도망친 강아지 이야기"}]}, "farm": {"emoji": "🚜", "en": "Farm", "ko": "농장", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "That's Not My Tractor", "author": "Fiona Watt", "cover": "https://covers.openlibrary.org/b/id/1389424-L.jpg", "reason": "트랙터 촉감을 만지는 촉감북"}, {"tier_label": "라임", "title": "Barnyard Dance", "author": "Sandra Boynton", "cover": "https://covers.openlibrary.org/b/id/796359-L.jpg", "reason": "농장 동물들의 흥나는 춤 라임"}, {"tier_label": "반복", "title": "Mrs. Wishy-Washy", "author": "Joy Cowley", "cover": "https://covers.openlibrary.org/b/id/259809-L.jpg", "reason": "동물을 씻기는 아주머니의 반복 소동"}, {"tier_label": "유머·반전", "title": "Click, Clack, Moo: Cows That Type", "author": "Doreen Cronin", "cover": "https://covers.openlibrary.org/b/id/5725264-L.jpg", "reason": "타자기로 요구하는 소들의 유머"}, {"tier_label": "스토리", "title": "The Little Red Hen", "author": "Paul Galdone", "cover": "https://covers.openlibrary.org/b/id/699933-L.jpg", "reason": "\"누가 도와줄래?\" 부지런한 암탉 이야기"}]}, "ocean": {"emoji": "🌊", "en": "Ocean", "ko": "바다", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Never Touch a Shark!", "author": "Rosie Greening", "cover": "https://covers.openlibrary.org/b/id/10847067-L.jpg", "reason": "말랑한 상어를 만지는 촉감 노벨티북"}, {"tier_label": "라임", "title": "Commotion in the Ocean", "author": "Giles Andreae", "cover": "https://covers.openlibrary.org/b/id/857691-L.jpg", "reason": "바다 동물들을 소개하는 라임"}, {"tier_label": "반복", "title": "Hooray for Fish!", "author": "Lucy Cousins", "cover": "https://covers.openlibrary.org/b/id/516528-L.jpg", "reason": "온갖 물고기가 이어지는 반복"}, {"tier_label": "유머·반전", "title": "I'm the Biggest Thing in the Ocean!", "author": "Kevin Sherry", "cover": "https://covers.openlibrary.org/b/id/575612-L.jpg", "reason": "허세 부리는 오징어의 반전 유머"}, {"tier_label": "스토리", "title": "The Rainbow Fish", "author": "Marcus Pfister", "cover": "https://covers.openlibrary.org/b/id/12961695-L.jpg", "reason": "반짝 비늘을 나누는 물고기 이야기"}]}, "monsters": {"emoji": "👻", "en": "Monsters", "ko": "괴물", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Go Away, Big Green Monster!", "author": "Ed Emberley", "cover": "https://covers.openlibrary.org/b/id/188727-L.jpg", "reason": "페이지를 넘기며 괴물을 없애는 다이컷 참여북"}, {"tier_label": "라임", "title": "The Gruffalo", "author": "Julia Donaldson", "cover": "https://covers.openlibrary.org/b/id/8561698-L.jpg", "reason": "없는 괴물을 지어내다 진짜 만나는 라임 서사"}, {"tier_label": "반복", "title": "If You're a Monster and You Know It", "author": "Rebecca Emberley", "cover": "https://covers.openlibrary.org/b/id/6462700-L.jpg", "reason": "\"행복하면~\"의 괴물 버전 반복 노래"}, {"tier_label": "유머·반전", "title": "The Monster at the End of This Book", "author": "Jon Stone", "cover": "https://covers.openlibrary.org/b/id/8580217-L.jpg", "reason": "넘기지 말라는 그로버의 참여형 유머"}, {"tier_label": "스토리", "title": "Where the Wild Things Are", "author": "Maurice Sendak", "cover": "https://covers.openlibrary.org/b/id/50842-L.jpg", "reason": "괴물 나라로 떠나는 상상 이야기"}]}, "halloween": {"emoji": "🎃", "en": "Halloween", "ko": "할로윈", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Where Is Baby's Pumpkin?", "author": "Karen Katz", "cover": "https://covers.openlibrary.org/b/id/760982-L.jpg", "reason": "플랩으로 할로윈 물건을 찾는 플랩북"}, {"tier_label": "라임", "title": "Five Little Pumpkins", "author": "전래동요 (Traditional)", "cover": "https://covers.openlibrary.org/b/id/799125-L.jpg", "reason": "호박 다섯 개의 전래 라임"}, {"tier_label": "반복", "title": "The Little Old Lady Who Was Not Afraid of Anything", "author": "Linda Williams", "cover": "https://covers.openlibrary.org/b/id/445200-L.jpg", "reason": "쫓아오는 물건들의 누적 반복"}, {"tier_label": "유머·반전", "title": "Creepy Carrots!", "author": "Aaron Reynolds", "cover": "https://covers.openlibrary.org/b/id/7256095-L.jpg", "reason": "당근이 쫓아온다?! 오싹+반전 유머"}, {"tier_label": "스토리", "title": "Room on the Broom", "author": "Julia Donaldson", "cover": "https://covers.openlibrary.org/b/id/10839950-L.jpg", "reason": "마녀 빗자루에 동물이 타는 이야기"}]}, "christmas": {"emoji": "🎄", "en": "Christmas", "ko": "크리스마스", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Dear Santa", "author": "Rod Campbell", "cover": "https://covers.openlibrary.org/b/id/438889-L.jpg", "reason": "플랩으로 산타의 선물을 여는 플랩북"}, {"tier_label": "라임", "title": "The Night Before Christmas", "author": "Clement C. Moore", "cover": "https://covers.openlibrary.org/b/id/8236410-L.jpg", "reason": "크리스마스 전날 밤의 고전 시"}, {"tier_label": "반복", "title": "The Twelve Days of Christmas", "author": "전래 캐럴 (Traditional)", "cover": "https://covers.openlibrary.org/b/id/260220-L.jpg", "reason": "선물이 하나씩 쌓이는 누적 캐럴"}, {"tier_label": "유머·반전", "title": "How the Grinch Stole Christmas!", "author": "Dr. Seuss", "cover": "https://covers.openlibrary.org/b/id/12055-L.jpg", "reason": "크리스마스를 훔치려던 그린치"}, {"tier_label": "스토리", "title": "The Polar Express", "author": "Chris Van Allsburg", "cover": "https://covers.openlibrary.org/b/id/394670-L.jpg", "reason": "북극행 기차를 탄 소년 이야기"}]}, "songs-rhymes": {"emoji": "🎶", "en": "Songs & Rhymes", "ko": "노래·마더구스", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "The Wheels on the Bus", "author": "Annie Kubler", "cover": "https://covers.openlibrary.org/b/id/9662881-L.jpg", "reason": "손유희로 함께 부르는 참여형 노래책"}, {"tier_label": "라임", "title": "Down by the Bay", "author": "Raffi", "cover": "https://covers.openlibrary.org/b/id/323280-L.jpg", "reason": "말장난이 이어지는 라임 노래"}, {"tier_label": "반복", "title": "If You're Happy and You Know It", "author": "Jane Cabrera", "cover": "https://covers.openlibrary.org/b/id/625653-L.jpg", "reason": "동작을 따라하는 반복 노래"}, {"tier_label": "유머·반전", "title": "There's a Wocket in My Pocket!", "author": "Dr. Seuss", "cover": "https://covers.openlibrary.org/b/id/255219-L.jpg", "reason": "엉터리 라임 단어의 말놀이 유머"}, {"tier_label": "스토리", "title": "Over in the Meadow", "author": "Ezra Jack Keats", "cover": "https://covers.openlibrary.org/b/id/402285-L.jpg", "reason": "자연 속 동물 가족을 세는 노래 이야기"}]}, "school-friends": {"emoji": "🏫", "en": "School & Friends", "ko": "학교·친구", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Spot Goes to School", "author": "Eric Hill", "cover": "https://covers.openlibrary.org/b/id/259959-L.jpg", "reason": "플랩으로 학교 하루를 여는 스팟 플랩북"}, {"tier_label": "라임", "title": "Llama Llama Misses Mama", "author": "Anna Dewdney", "cover": "https://covers.openlibrary.org/b/id/5547791-L.jpg", "reason": "첫 등원의 불안을 달래는 라임"}, {"tier_label": "반복", "title": "Do You Want to Be My Friend?", "author": "Eric Carle", "cover": "https://covers.openlibrary.org/b/id/2243425-L.jpg", "reason": "\"내 친구 될래?\"를 반복하는 우정책"}, {"tier_label": "유머·반전", "title": "We Don't Eat Our Classmates", "author": "Ryan T. Higgins", "cover": "https://covers.openlibrary.org/b/id/8610594-L.jpg", "reason": "친구를 먹으면 안 돼! 공룡의 유머"}, {"tier_label": "스토리", "title": "The Kissing Hand", "author": "Audrey Penn", "cover": "https://covers.openlibrary.org/b/id/673400-L.jpg", "reason": "손바닥 뽀뽀로 등원 불안을 달래는 이야기"}]}, "daily-routine": {"emoji": "🛁", "en": "Daily Routine", "ko": "생활습관", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "P is for Potty!", "author": "Naomi Kleinberg", "cover": "https://covers.openlibrary.org/b/id/8315344-L.jpg", "reason": "플랩으로 배변을 배우는 세서미 플랩북"}, {"tier_label": "라임", "title": "Pajama Time!", "author": "Sandra Boynton", "cover": "https://covers.openlibrary.org/b/id/507595-L.jpg", "reason": "잘 준비를 노래하는 라임"}, {"tier_label": "반복", "title": "The Napping House", "author": "Audrey Wood", "cover": "https://covers.openlibrary.org/b/id/114437-L.jpg", "reason": "잠든 식구가 쌓이는 누적 반복"}, {"tier_label": "유머·반전", "title": "No, David!", "author": "David Shannon", "cover": "https://covers.openlibrary.org/b/id/2269809-L.jpg", "reason": "말썽꾸러기 데이빗의 \"안 돼!\" 유머"}, {"tier_label": "스토리", "title": "Bathtime for Biscuit", "author": "Alyssa Satin Capucilli", "cover": "https://covers.openlibrary.org/b/id/24574-L.jpg", "reason": "목욕 시간 강아지 비스킷 이야기"}]}, "opposites-concepts": {"emoji": "🔀", "en": "Opposites & Concepts", "ko": "반대말·개념", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Press Here", "author": "Hervé Tullet", "cover": "https://covers.openlibrary.org/b/id/6934884-L.jpg", "reason": "점을 누르면 변하는 마법 같은 참여형"}, {"tier_label": "라임", "title": "Round Is a Mooncake", "author": "Roseanne Thong", "cover": "https://covers.openlibrary.org/b/id/600331-L.jpg", "reason": "일상 속 도형을 찾는 라임"}, {"tier_label": "반복", "title": "Opposites", "author": "Sandra Boynton", "cover": "https://covers.openlibrary.org/b/id/405632-L.jpg", "reason": "반대말을 반복으로 익히는 보드북"}, {"tier_label": "유머·반전", "title": "Duck! Rabbit!", "author": "Amy Krouse Rosenthal", "cover": "https://covers.openlibrary.org/b/id/6309990-L.jpg", "reason": "오리냐 토끼냐 관점 다툼의 유머"}, {"tier_label": "스토리", "title": "Mouse Shapes", "author": "Ellen Stoll Walsh", "cover": "https://covers.openlibrary.org/b/id/1120591-L.jpg", "reason": "도형으로 그림을 만드는 생쥐 이야기"}]}, "imagination": {"emoji": "🎨", "en": "Imagination", "ko": "상상·놀이", "month_label": "", "subject": "", "read_method": "", "activities": "", "expressions": "", "books": [{"tier_label": "조작북", "title": "Mix It Up!", "author": "Hervé Tullet", "cover": "https://covers.openlibrary.org/b/id/8174029-L.jpg", "reason": "손으로 색을 섞는 참여형 (Press Here 작가)"}, {"tier_label": "라임", "title": "If I Built a House", "author": "Chris Van Dusen", "cover": "https://covers.openlibrary.org/b/id/10132794-L.jpg", "reason": "상상의 집을 짓는 라임"}, {"tier_label": "반복", "title": "Not a Box", "author": "Antoinette Portis", "cover": "https://covers.openlibrary.org/b/id/45783-L.jpg", "reason": "\"상자 아니야!\" 반복하며 상상하기"}, {"tier_label": "유머·반전", "title": "Sam & Dave Dig a Hole", "author": "Mac Barnett", "cover": "https://covers.openlibrary.org/b/id/7337430-L.jpg", "reason": "구멍 파기와 그림의 기막힌 반전"}, {"tier_label": "스토리", "title": "Harold and the Purple Crayon", "author": "Crockett Johnson", "cover": "https://covers.openlibrary.org/b/id/50758-L.jpg", "reason": "크레용으로 세상을 그리는 상상 이야기"}]}}}</script>
+<script id="appcode">
+(function(){
+  var LT='<';
+  var app=document.getElementById('app');
+  function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  var PUBLISHED=JSON.parse(document.getElementById('APP_DATA').textContent);
+  var DRAFTKEY='joy-study-draft:'+location.pathname;
+  function clone(o){return JSON.parse(JSON.stringify(o));}
+  function params(){return new URLSearchParams(location.search);}
+  var isAdmin=params().has('admin');
+
+  // ---- share page ----
+  function parseExpr(txt){
+    return (txt||'').split(/\n/).map(function(l){return l.trim();}).filter(Boolean).map(function(l){
+      var m=l.split(/\s*[|\-–]\s*/);
+      return {en:m[0]||'', ko:m.slice(1).join(' - ')||''};
+    });
+  }
+  function parseList(txt){return (txt||'').split(/\n/).map(function(l){return l.trim();}).filter(Boolean);}
+
+  function renderShare(data, key){
+    var t=data.themes[key];
+    if(!t){app.innerHTML='<div class="wrap"><p class="empty" style="padding:40px 0">공개된 주제가 아직 없어요.</p></div>';return;}
+    var books=t.books.map(function(b){
+      return '<div class="book">'+
+        '<div class="cv">'+(b.cover?'<img loading="lazy" src="'+esc(b.cover)+'" alt="'+esc(b.title)+'">':'')+'</div>'+
+        '<div class="bb"><span class="ty">'+esc(b.tier_label)+'</span>'+
+        '<div class="bt">'+esc(b.title)+'</div>'+
+        '<div class="ba">'+esc(b.author)+'</div>'+
+        (b.reason?'<div class="br">'+esc(b.reason)+'</div>':'')+
+        '</div></div>';
+    }).join('');
+    var acts=parseList(t.activities);
+    var exprs=parseExpr(t.expressions);
+    var h='';
+    h+='<div class="share"><div class="wrap">';
+    h+='<div class="hero">';
+    h+='<div class="ml">'+(t.month_label?esc(t.month_label):'이번 달 영어책')+'</div>';
+    h+='<div class="em">'+esc(t.emoji)+'</div>';
+    h+='<h1>'+esc(t.ko)+'</h1><div class="en">'+esc(t.en)+'</div>';
+    if(t.subject) h+='<p class="subj prose">'+esc(t.subject)+'</p>';
+    h+='</div>';
+    h+='<div class="sec"><h2>📚 이번 달 5권</h2><div class="books">'+books+'</div></div>';
+    h+='<div class="sec"><h2>🗣️ 읽어주는 방법</h2>'+(t.read_method?'<div class="prose">'+esc(t.read_method)+'</div>':'<p class="empty">준비 중이에요.</p>')+'</div>';
+    h+='<div class="sec"><h2>🎨 책 활용 아이디어</h2>'+(acts.length?'<ul class="li">'+acts.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul>':'<p class="empty">준비 중이에요.</p>')+'</div>';
+    h+='<div class="sec"><h2>💬 관련 영어표현</h2>'+(exprs.length?'<ul class="expr">'+exprs.map(function(e){return '<li><span class="en2">'+esc(e.en)+'</span>'+(e.ko?' <span class="ko2">'+esc(e.ko)+'</span>':'')+'</li>';}).join('')+'</ul>':'<p class="empty">준비 중이에요.</p>')+'</div>';
+    h+='<div class="foot">조이네 엄마표영어 스터디 · 매달 새로운 5권으로 함께해요</div>';
+    h+='</div></div>';
+    app.innerHTML=h;
+  }
+
+  // ---- admin ----
+  var DATA;
+  function saveDraft(){try{localStorage.setItem(DRAFTKEY,JSON.stringify(DATA));}catch(e){}}
+  function loadDraft(){try{var r=localStorage.getItem(DRAFTKEY);return r?JSON.parse(r):null;}catch(e){return null;}}
+  var dirty=false;
+  function setDirty(v){dirty=v;var s=document.getElementById('st');if(s)s.textContent=v?'● 미발행 변경사항':'';}
+
+  function renderAdmin(){
+    DATA=loadDraft()||clone(PUBLISHED);
+    var opts=DATA.order.map(function(k){var t=DATA.themes[k];return '<option value="'+k+'">'+esc(t.emoji+' '+t.ko+' ('+t.en+')')+'</option>';}).join('');
+    var cur=DATA.meta.current;
+    var h='';
+    h+='<div class="top"><div class="wrap"><span class="brand">🛠️ 스터디 관리자</span>'+
+       '<span class="sp"><button class="btn" id="prev">공유 미리보기</button>'+
+       '<button class="btn cor" id="pub">저장 & 발행</button></span></div></div>';
+    h+='<div class="adm"><div class="wrap">';
+    h+='<div class="card"><div class="row"><div><label class="f" style="margin-top:0">이번 달 공개 주제</label>'+
+       '<select class="t" id="curSel">'+DATA.order.map(function(k){var t=DATA.themes[k];return '<option value="'+k+'"'+(k===cur?' selected':'')+'>'+esc(t.emoji+' '+t.ko)+'</option>';}).join('')+'</select>'+
+       '<div class="hint">부모들이 링크를 열면 이 주제가 보여요.</div></div>'+
+       '<div style="flex:1"></div><span class="status" id="st"></span></div></div>';
+    h+='<div class="card"><label class="f" style="margin-top:0">편집할 주제</label><select class="t" id="edSel">'+opts+'</select>'+
+       '<div id="form"></div></div>';
+    h+='</div></div>';
+    app.innerHTML=h;
+    document.getElementById('edSel').value=cur;
+    renderForm(cur);
+    document.getElementById('edSel').addEventListener('change',function(e){renderForm(e.target.value);});
+    document.getElementById('curSel').addEventListener('change',function(e){DATA.meta.current=e.target.value;setDirty(true);saveDraft();});
+    document.getElementById('prev').addEventListener('click',function(){previewShare(document.getElementById('edSel').value);});
+    document.getElementById('pub').addEventListener('click',publish);
+    window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+  }
+
+  function renderForm(key){
+    var t=DATA.themes[key];
+    var f=document.getElementById('form');
+    var books=t.books.map(function(b,i){
+      return '<div class="bk">'+(b.cover?'<img src="'+esc(b.cover)+'">':'<div style="width:52px;height:70px;background:#eee;border-radius:6px"></div>')+
+        '<div class="bf"><span class="pill">'+esc(b.tier_label)+'</span>'+
+        '<input class="t" style="margin:4px 0" data-bk="'+i+'" data-fld="title" value="'+esc(b.title)+'">'+
+        '<input class="t" style="margin-bottom:4px;font-size:.82rem" data-bk="'+i+'" data-fld="author" value="'+esc(b.author)+'">'+
+        '<input class="t" style="font-size:.82rem" data-bk="'+i+'" data-fld="reason" value="'+esc(b.reason)+'"></div></div>';
+    }).join('');
+    f.innerHTML=
+      '<label class="f">월 라벨 <span class="hint">(예: 2026년 10월 · 1개월차)</span></label><input class="t" id="fml" value="'+esc(t.month_label)+'">'+
+      '<label class="f">주제 소개 (엄마용)</label><textarea class="t" id="fsub" style="min-height:70px">'+esc(t.subject)+'</textarea>'+
+      '<label class="f">읽어주는 방법</label><textarea class="t" id="frm">'+esc(t.read_method)+'</textarea>'+
+      '<label class="f">책 활용 아이디어 <span class="hint">(한 줄에 하나씩)</span></label><textarea class="t" id="fact">'+esc(t.activities)+'</textarea>'+
+      '<label class="f">관련 영어표현 <span class="hint">(한 줄에 하나 · "English - 한글" 형식)</span></label><textarea class="t" id="fexp">'+esc(t.expressions)+'</textarea>'+
+      '<label class="f">이번 주제 5권 (제목·저자·설명 수정 가능)</label>'+books;
+    function bind(id,fld){document.getElementById(id).addEventListener('input',function(e){t[fld]=e.target.value;setDirty(true);saveDraft();});}
+    bind('fml','month_label');bind('fsub','subject');bind('frm','read_method');bind('fact','activities');bind('fexp','expressions');
+    f.querySelectorAll('input[data-bk]').forEach(function(inp){
+      inp.addEventListener('input',function(e){t.books[+e.target.dataset.bk][e.target.dataset.fld]=e.target.value;setDirty(true);saveDraft();});
+    });
+  }
+
+  function addAdminEntry(){
+    if(document.getElementById('adminFab'))return;
+    var b=document.createElement('button');
+    b.id='adminFab'; b.textContent='🛠 관리자';
+    b.className='noprint';
+    b.style.cssText='position:fixed;right:16px;bottom:16px;z-index:50;background:#0A5E5D;color:#fff;border:none;border-radius:999px;padding:11px 16px;font-weight:800;box-shadow:0 6px 18px rgba(0,0,0,.25);cursor:pointer';
+    b.addEventListener('click',renderAdmin);
+    document.body.appendChild(b);
+  }
+  function previewShare(key){
+    renderShare(DATA,key);
+    var bar=document.createElement('div');
+    bar.id='pvbar'; bar.className='noprint';
+    bar.style.cssText='position:fixed;left:0;right:0;top:0;z-index:60;background:#E8623C;color:#fff;text-align:center;padding:9px;font-weight:800;cursor:pointer';
+    bar.textContent='← 미리보기(미발행) · 관리자로 돌아가기';
+    bar.addEventListener('click',function(){bar.remove();renderAdmin();});
+    document.body.appendChild(bar);
+  }
+
+  function buildDoc(data){
+    var css=document.getElementById('appcss').textContent;
+    var js=document.getElementById('appcode').textContent;
+    var json=JSON.stringify(data).replace(/</g,'\\u003c');
+    return '<!doctype html>'+LT+'html lang="ko">'+LT+'head>'+
+      LT+'meta charset="utf-8">'+
+      LT+'meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">'+
+      LT+'title>조이네 엄마표영어 스터디'+LT+'/title>'+
+      LT+'style id="appcss">'+css+LT+'/style>'+LT+'/head>'+LT+'body>'+
+      LT+'div id="app">'+LT+'/div>'+
+      LT+'script type="application/json" id="APP_DATA">'+json+LT+'/script>'+
+      LT+'script id="appcode">'+js+LT+'/script>'+LT+'/body>'+LT+'/html>';
+  }
+
+  async function publish(){
+    var st=document.getElementById('st');
+    var art=null;
+    try{art=await claude.use('artifact');}catch(e){}
+    if(!art){st.textContent='발행 기능을 쓸 수 없어요 (읽기 전용 뷰).';return;}
+    st.textContent='발행 중…';
+    try{
+      try{localStorage.removeItem(DRAFTKEY);}catch(e){}
+      await art.publish(buildDoc(DATA));
+      dirty=false; st.textContent='발행됨! 새로고침됩니다…';
+    }catch(e){
+      if(e&&(e.code==='not_writer'||e.code==='not_granted'||e.code==='consent_required')) st.textContent='발행 권한이 없어요. 소유자 계정에서 편집하세요.';
+      else if(e&&e.code==='conflict') st.textContent='다른 곳에서 먼저 저장됨 — 새로고침됩니다.';
+      else st.textContent='발행 실패: '+((e&&(e.code||e.message))||'오류');
+      saveDraft();
+    }
+  }
+
+  // ---- route ----
+  // 부모: 공유 화면. 소유자: 우하단 '관리자' 버튼 노출(자동 감지).
+  renderShare(PUBLISHED, PUBLISHED.meta.current);
+  (async function(){
+    var u=null; try{u=await claude.use('user');}catch(e){}
+    try{ if(u && ((u.isOwner&&u.isOwner())||(u.canEdit&&u.canEdit()))) addAdminEntry(); }catch(e){}
+  })();
+})();
+</script>
