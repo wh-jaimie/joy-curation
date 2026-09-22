@@ -101,8 +101,9 @@ footer p{color:var(--ink-soft);font-size:.82rem;margin:.3em 0}
     <div class="eyebrow">엄마가 매번 고르지 않아도 되는 코스</div>
     <h1>파닉스 전 120권,<br>그냥 따라오세요</h1>
     <p class="lead">뭘 읽지? → 검색 → 후기 → 주문 → 실패 → 또 검색.
-      이 반복을 없앴어요. <strong>24개 주제 × 5권</strong>, 각 5권은 쉬운 책부터 조금 긴 책까지
-      계단식으로 골라 담았습니다. 순서·반복은 자유예요.</p>
+      이 반복을 없앴어요. <strong>24개 주제 × 5권</strong>, 각 주제는
+      <strong>조작북·라임·반복·유머·스토리</strong> 5가지 유형을 골고루 담았습니다.
+      순서·반복은 자유예요.</p>
 
     <div class="panel">
       <div class="r1">
@@ -143,7 +144,7 @@ const save=()=>{try{localStorage.setItem(KEY,JSON.stringify([...seen]));}catch(e
 window._imgErr=el=>{el.parentElement.classList.add('noimg');el.remove();};
 
 // 범례
-document.getElementById('legend').innerHTML='<span class="lg" style="color:var(--ink)">난이도 계단:</span>'+
+document.getElementById('legend').innerHTML='<span class="lg" style="color:var(--ink)">5가지 유형:</span>'+
   [1,2,3,4,5].map(t=>`<span class="lg"><span class="sw" style="background:${tvar(t)}"></span>${t}. ${esc(tier_labels[t])}</span>`).join('');
 
 function stepHTML(b){
