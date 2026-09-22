@@ -16,7 +16,28 @@ for b in books:
     b["id"] = _bid(b)
 from collections import Counter
 band_counts = Counter(b["band"] for b in books)
-payload = {"books": books, "bands": [
+
+# 주제별 컬렉션 (rank 기준, 각 5권) — 인스타 캐러셀 1개 = 컬렉션 1개
+THEMES = [
+    ("🌙", "잠들기 전 5분, 잠자리 그림책", "하루를 포근하게 닫아주는 5권", "", [2,23,29,9,53]),
+    ("🎵", "노래처럼 읽는 첫 책", "멜로디에 얹혀 저절로 따라 부르는 챈트·리듬", "", [4,10,94,35,85]),
+    ("🐛", "에릭 칼 대표작", "반복과 색으로 만나는 Eric Carle", "", [1,3,22,16,46]),
+    ("🐾", "동물이 가득, 반복이 재밌어", "소리와 패턴으로 빠져드는 동물책", "", [6,5,36,62,32]),
+    ("👶", "아기 첫 보드북", "까꿍·플랩으로 시작하는 첫 상호작용", "0~2세", [42,51,44,88,98]),
+    ("✋", "만지고 참여하는 책", "아이가 직접 개입하는 인터랙티브", "", [80,12,84,69,99]),
+    ("❤️", "사랑을 전하는 책", "재우며 안아주며 읽는 애착 그림책", "", [7,24,79,66,100]),
+    ("🚗", "붕붕! 탈것 & 움직임", "소리와 동작으로 신나는 5권", "", [11,18,48,104,101]),
+    ("🌟", "마음이 자라는 그림책", "감정·자존감을 키우는 이야기", "4~6세", [14,74,105,33,60]),
+    ("🏅", "세계가 사랑한 명작", "오래 읽히는 칼데콧·클래식", "4~6세", [19,75,97,102,103]),
+]
+by_rank = {b["rank"]: b for b in books}
+themes_payload = []
+for emoji, title, hook, age, ranks in THEMES:
+    items = [by_rank[r] for r in ranks if r in by_rank]
+    themes_payload.append({"emoji": emoji, "title": title, "hook": hook, "age": age,
+                           "ids": [b["id"] for b in items]})
+
+payload = {"books": books, "themes": themes_payload, "bands": [
     ["A", "아기·첫책", "0~2세", band_counts.get("아기·첫책 (0~2세)", 0)],
     ["B", "유아", "2~4세", band_counts.get("유아 (2~4세)", 0)],
     ["C", "미취학", "4~6세", band_counts.get("미취학 (4~6세)", 0)],
@@ -86,6 +107,32 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;
 .bar > i{display:block;height:100%;width:0;border-radius:999px;
   background:linear-gradient(90deg,var(--teal),var(--amber));transition:width .35s ease}
 section{padding-block:22px}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(1.5rem,3.6vw,2.05rem)}
+.sec-head .sub{color:var(--ink-soft);font-size:.9rem}
+/* 주제별 컬렉션 */
+.theme{margin-top:22px;background:var(--surface);border:1px solid var(--line);border-radius:18px;
+  padding:16px 16px 18px;box-shadow:var(--shadow)}
+.theme .th{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 2px 12px}
+.theme .th .emo{font-size:1.35rem;line-height:1}
+.theme .th h3{font-size:1.18rem}
+.theme .th .agechip{font-size:.68rem;font-weight:800;color:#fff;background:var(--plum);padding:2px 8px;border-radius:7px;align-self:center}
+.theme .th .hook{font-size:.86rem;color:var(--ink-soft);flex-basis:100%}
+.strip{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.mini{display:flex;flex-direction:column;gap:6px}
+.mini .mc{position:relative;aspect-ratio:3/4;border-radius:9px;overflow:hidden;background:var(--surface-2);box-shadow:var(--shadow)}
+.mini .mc img{width:100%;height:100%;object-fit:cover;display:block}
+.mini .mc .mph{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:8px;text-align:center;color:#fff}
+.mini .mc .mph .pt{font-family:'Fraunces',serif;font-weight:600;font-size:.72rem;line-height:1.15}
+.mini .mc.noimg .mph{display:flex}
+.mini .mc .sc{position:absolute;bottom:5px;left:5px;background:var(--teal-deep);color:#fff;font-size:.6rem;font-weight:800;padding:2px 6px;border-radius:6px;display:none}
+.mini.seen .mc{opacity:.5}
+.mini.seen .mc .sc{display:block}
+.mini .mt{font-size:.76rem;font-weight:700;line-height:1.2}
+.mini .mr{font-size:.7rem;color:var(--ink-soft);line-height:1.35;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+@media (max-width:640px){.strip{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:400px){.strip{grid-template-columns:repeat(2,1fr)}}
 .toolbar{display:flex;align-items:center;gap:10px;margin:6px 0 20px;flex-wrap:wrap}
 .togglelbl{display:inline-flex;align-items:center;gap:7px;font-size:.85rem;color:var(--ink);cursor:pointer;
   border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:999px;font-weight:700}
@@ -161,6 +208,15 @@ footer p{color:var(--ink-soft);font-size:.82rem;margin:.3em 0}
   </section>
 
   <section>
+    <div class="sec-head">
+      <h2>주제별 컬렉션</h2>
+      <span class="sub">인스타에 올리기 좋은 5권 묶음 · 표지를 캡처해 카드로 쓰세요</span>
+    </div>
+    <div id="themes"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2>전체 목록</h2><span class="sub">106권을 연령대·검색으로 찾아보세요</span></div>
     <div class="toolbar">
       <label>정렬 <select id="sort">
         <option value="rank">전세계 인기순</option>
@@ -181,7 +237,8 @@ footer p{color:var(--ink-soft);font-size:.82rem;margin:.3em 0}
 </div></footer>
 
 <script>
-const P=/*DATA*/;const {books,bands}=P;
+const P=/*DATA*/;const {books,bands,themes}=P;
+const byId=Object.fromEntries(books.map(b=>[b.id,b]));
 const esc=s=>(s||"").replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const bandColor={A:'var(--bandA)',B:'var(--bandB)',C:'var(--bandC)'};
 const bandName={A:'아기·첫책',B:'유아',C:'미취학'};
@@ -282,6 +339,35 @@ document.getElementById('theme').addEventListener('click',()=>{
   const next=dark?'light':'dark';root.setAttribute('data-theme',next);
   try{localStorage.setItem('joy-theme',next);}catch(e){}
 });
+// 주제별 컬렉션 렌더
+function renderThemes(){
+  document.getElementById('themes').innerHTML = themes.map(t=>`
+    <div class="theme">
+      <div class="th">
+        <span class="emo">${t.emoji}</span><h3>${esc(t.title)}</h3>
+        ${t.age?`<span class="agechip">${esc(t.age)}</span>`:''}
+        <span class="hook">${esc(t.hook)}</span>
+      </div>
+      <div class="strip">
+        ${t.ids.map(id=>byId[id]).filter(Boolean).map(b=>`
+          <div class="mini${seen.has(b.id)?' seen':''}" data-id="${esc(b.id)}">
+            <div class="mc">
+              ${b.cover?`<img loading="lazy" src="${esc(b.cover)}" alt="${esc(b.title)}" onerror="_imgErr(this)">`:''}
+              <div class="mph" style="background:linear-gradient(150deg,${bandColor[b.band_key]},#0006)"><div class="pt">${esc(b.title)}</div></div>
+              <span class="sc">✓</span>
+            </div>
+            <div class="mt">${esc(b.title)}</div>
+            <div class="mr">${esc(b.reason||'')}</div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+// 봤어요 토글 시 주제 섹션의 표시도 갱신
+const _origToggle=toggleSeen;
+toggleSeen=function(id){_origToggle(id);
+  document.querySelectorAll(`.mini[data-id="${CSS.escape(id)}"]`).forEach(m=>m.classList.toggle('seen',seen.has(id)));
+};
+renderThemes();
 updateProgress();
 render();
 </script>
